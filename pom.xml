@@ -6,7 +6,7 @@
 
     <groupId>ua.inf.iwanoff</groupId>
     <artifactId>attestation</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>2.2</version>
     <name>attestation</name>
 
     <properties>
@@ -81,11 +81,10 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>ua.inf.iwanoff.attestation/ua.inf.iwanoff.attestation.AttestationApplication
-                            </mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
-                            <jlinkImageName>app</jlinkImageName>
+                            <mainClass>ua.inf.iwanoff.attestation/ua.inf.iwanoff.attestation.Launcher</mainClass>
+                            <launcher>attestation</launcher>
+                            <jlinkZipName>attestation</jlinkZipName>
+                            <jlinkImageName>attestation</jlinkImageName>
                             <noManPages>true</noManPages>
                             <stripDebug>true</stripDebug>
                             <noHeaderFiles>true</noHeaderFiles>
@@ -93,6 +92,51 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>ua.inf.iwanoff.attestation.Launcher</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+            <groupId>org.panteleyev</groupId>
+            <artifactId>jpackage-maven-plugin</artifactId>
+            <version>1.5.1</version> <!-- Use the latest version available -->
+            <configuration>
+                <destination>${project.build.directory}/jpackage</destination>
+                <name>WRS Attestation</name>
+
+                <!-- Other jpackage options -->
+                <!-- Other configurations specific to your application and OS -->
+                <input>
+                    ${project.build.directory}
+                </input>
+                <mainJar>${project.build.finalName}.jar</mainJar>
+                <!-- More configuration properties can be added here -->
+            </configuration>
+            <executions>
+                <execution>
+                    <phase>package</phase> <!-- or any phase you want to run jpackage -->
+                    <goals>
+                        <goal>jpackage</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
         </plugins>
     </build>
 </project>

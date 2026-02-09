@@ -8,6 +8,7 @@ module ua.inf.iwanoff.attestation {
     requires java.desktop;
 
 
-    opens ua.inf.iwanoff.attestation to javafx.fxml;
+    opens ua.inf.iwanoff.attestation to javafx.fxml, jakarta.xml.bind;
+    opens ua.inf.iwanoff.attestation.model to javafx.fxml, jakarta.xml.bind;
     exports ua.inf.iwanoff.attestation;
 }
