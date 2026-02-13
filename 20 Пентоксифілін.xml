@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WrsData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SSName="Пентоксифілін" Operator="Глущенко О.С." Stuff="Пентоксифілін Saneca Pharmaceuticals, Словаччина (5070316)" Amount="4.0 г" OfficialStandardSample="Pentoxifylline CRS EDQM (0510000) b.1.6" Document="СОП-09.02-005" Date="25.11.2016" Uncertainty="0" XPSS="100" DeltaWRS="1.6" DeltaUnit="1.6">
+  <Sample Name="CRS1" Flag="PRS" Concentration="0.501" Uncertainty="0.78">
+    <X Value="0.4092" Date="0" />
+    <X Value="0.4093" Date="0" />
+    <X Value="0.4092" Date="0" />
+  </Sample>
+  <Sample Name="CRS2" Flag="PRS" Concentration="0.501" Uncertainty="0.78">
+    <X Value="0.4098" Date="0" />
+    <X Value="0.4098" Date="0" />
+    <X Value="0.4098" Date="0" />
+  </Sample>
+  <Sample Name="WRS1" Flag="WRS" Concentration="0.514" Uncertainty="0.78">
+    <X Value="0.4201" Date="0" />
+    <X Value="0.4201" Date="0" />
+    <X Value="0.4202" Date="0" />
+  </Sample>
+  <Sample Name="WRS2" Flag="WRS" Concentration="0.514" Uncertainty="0.78">
+    <X Value="0.4201" Date="0" />
+    <X Value="0.4201" Date="0" />
+    <X Value="0.4202" Date="0" />
+  </Sample>
+  <Sample Name="WRS3" Flag="WRS" Concentration="0.513" Uncertainty="0.78">
+    <X Value="0.4194" Date="0" />
+    <X Value="0.4195" Date="0" />
+    <X Value="0.4193" Date="0" />
+  </Sample>
+  <Sample Name="WRS4" Flag="WRS" Concentration="0.513" Uncertainty="0.78">
+    <X Value="0.4193" Date="0" />
+    <X Value="0.4193" Date="0" />
+    <X Value="0.4193" Date="0" />
+  </Sample>
+  <Sample Name="WRS5" Flag="WRS" Concentration="0.514" Uncertainty="0.78">
+    <X Value="0.4202" Date="0" />
+    <X Value="0.42" Date="0" />
+    <X Value="0.4487" Date="0" />
+  </Sample>
+  <WeightsDilutions />
+</WrsData>

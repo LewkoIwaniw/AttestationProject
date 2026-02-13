@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WrsData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SSName="Декаметоксин" Operator="Глущенко О.С." Stuff="Декаметоксин «Shandong Lekangxin Pharmaceutical Co. LTD», Китай (20160131)" Amount="1.5 г" OfficialStandardSample="Декаметоксин working standart (20160131)" Document="СОП-09.02-005" Date="16.08.2016" Uncertainty="0" XPSS="99.5" DeltaWRS="1.6" DeltaUnit="1.6">
+  <Sample Name="CRS1" Flag="PRS" Concentration="0.201" Uncertainty="1.198">
+    <X Value="0.4529" Date="0" />
+    <X Value="0.453" Date="0" />
+    <X Value="0.453" Date="0" />
+  </Sample>
+  <Sample Name="CRS2" Flag="PRS" Concentration="0.2007" Uncertainty="1.198">
+    <X Value="0.452" Date="0" />
+    <X Value="0.4521" Date="0" />
+    <X Value="0.4518" Date="0" />
+  </Sample>
+  <Sample Name="WRS1" Flag="WRS" Concentration="0.1995" Uncertainty="1.198">
+    <X Value="0.4493" Date="0" />
+    <X Value="0.4496" Date="0" />
+    <X Value="0.4499" Date="0" />
+  </Sample>
+  <Sample Name="WRS2" Flag="WRS" Concentration="0.1996" Uncertainty="1.198">
+    <X Value="0.4498" Date="0" />
+    <X Value="0.4497" Date="0" />
+    <X Value="0.4497" Date="0" />
+  </Sample>
+  <Sample Name="WRS3" Flag="WRS" Concentration="0.1997" Uncertainty="1.198">
+    <X Value="0.4505" Date="0" />
+    <X Value="0.4495" Date="0" />
+    <X Value="0.4501" Date="0" />
+  </Sample>
+  <Sample Name="WRS4" Flag="WRS" Concentration="0.1995" Uncertainty="1.198">
+    <X Value="0.4507" Date="0" />
+    <X Value="0.4515" Date="0" />
+    <X Value="0.4505" Date="0" />
+  </Sample>
+  <Sample Name="WRS5" Flag="WRS" Concentration="0.2001" Uncertainty="1.198">
+    <X Value="0.45" Date="0" />
+    <X Value="0.4498" Date="0" />
+    <X Value="0.4487" Date="0" />
+  </Sample>
+  <WeightsDilutions />
+</WrsData>

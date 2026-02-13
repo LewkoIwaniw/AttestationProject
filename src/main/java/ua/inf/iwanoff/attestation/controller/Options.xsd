@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="Options">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Window" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:attribute name="Left" type="xs:int" use="required" />
+                        <xs:attribute name="Top" type="xs:int" use="required" />
+                        <xs:attribute name="Width" type="xs:int" use="required" />
+                        <xs:attribute name="Height" type="xs:int" use="required" />
+                    </xs:complexType>
+                </xs:element>
+            <xs:element name="ReportOptions">
+            <xs:complexType>
+                <xs:attribute name="CalcDisp" type="xs:string" use="required" />
+                <xs:attribute name="CalcHomo" type="xs:string" use="required" />
+                <xs:attribute name="CalcDrift" type="xs:string" use="required" />
+                <xs:attribute name="StudentSides" type="xs:int" use="required" />
+            </xs:complexType>
+            </xs:element>
+            </xs:sequence>
+            <xs:attribute name="CurrentDir" type="xs:string" use="optional" />
+            <xs:attribute name="Language" type="xs:string" use="required" />
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

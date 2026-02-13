@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WrsData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         SSName="Бисопролола фумарат"
+         Operator="Леонтьев"
+         Stuff="Бисопролола фумарат"
+         Amount="30 г"
+         OfficialStandardSample="ФСЗ ГФУ Бісопрололу фумарат"
+         Document="ФСЗ ГФУ  "
+         Date="29.06.2014"
+         Uncertainty="0.13"
+         XPSS="99.9"
+         DeltaWRS="0.51"
+         DeltaUnit="0.51">
+  <Sample Name="ФСО1" Flag="PRS" Concentration="0.428090408" Uncertainty="0.13">
+    <X Value="1313.62292" Date="1" />
+    <X Value="1311.86572" Date="2" />
+    <X Value="1313.87207" Date="3" />
+    <X Value="1313.3728" Date="4" />
+  </Sample>
+  <Sample Name="ФСО2" Flag="PRS" Concentration="0.416596497" Uncertainty="0.13">
+    <X Value="1279.86523" Date="1" />
+    <X Value="1277.2085" Date="2" />
+    <X Value="1278.02893" Date="3" />
+    <X Value="1279.4613" Date="4" />
+  </Sample>
+  <Sample Name="РСО1" Flag="WRS" Concentration="0.419925081" Uncertainty="0.13">
+    <X Value="1288.06079" Date="1" />
+    <X Value="1290.25525" Date="2" />
+    <X Value="1289.34558" Date="3" />
+    <X Value="1290.92529" Date="4" />
+  </Sample>
+  <Sample Name="РСО2" Flag="WRS" Concentration="0.422183898" Uncertainty="0.13">
+    <X Value="1298.38196" Date="1" />
+    <X Value="1298.11609" Date="2" />
+    <X Value="1296.9552" Date="3" />
+    <X Value="1298.03162" Date="4" />
+  </Sample>
+  <WeightsDilutions>ФСО1: 101.71, ФСО2: 98.95, РСО1:99.77, РСО2:100.37
+ФСО1: 237.59, ФСО2: 237.52, РСО1:237.59, РСО2:237.74</WeightsDilutions>
+</WrsData>

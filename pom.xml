@@ -119,7 +119,11 @@
             <configuration>
                 <destination>${project.build.directory}/jpackage</destination>
                 <name>WRS Attestation</name>
-
+                <type>EXE</type>
+                <appVersion>1.0.0</appVersion>
+                <winDirChooser>true</winDirChooser>
+                <winMenu>true</winMenu>
+                <winShortcut>true</winShortcut>
                 <!-- Other jpackage options -->
                 <!-- Other configurations specific to your application and OS -->
                 <input>

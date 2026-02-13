@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ua.inf.iwanoff.attestation.Controller">
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <Menu fx:id="menuFile" text="File">
+                <MenuItem fx:id="menuItemFileNew" onAction="#newFile" text="New"/>
+                <MenuItem fx:id="menuItemFileOpen" onAction="#open" text="Open"/>
+                <MenuItem fx:id="menuItemFileImportTxt" onAction="#importFromTxt" text="Import from TXT"/>
+                <MenuItem fx:id="menuItemFileSave" onAction="#save" text="Save"/>
+                <MenuItem fx:id="menuItemFileSaveAs" onAction="#saveAs" text="Save"/>
+                <MenuItem fx:id="menuItemFileSaveReport" text="Save report" onAction="#saveReport" disable="true"/>
+                <SeparatorMenuItem/>
+                <MenuItem fx:id="menuItemFileClose" onAction="#close" text="Exit"/>
+            </Menu>
+            <Menu fx:id="menuEdit" text="Edit">
+                <MenuItem fx:id="menuItemEditCut" text="Cut"/>
+                <MenuItem fx:id="menuItemEditCopy" text="Copy"/>
+                <MenuItem fx:id="menuItemEditPaste" text="Paste"/>
+            </Menu>
+            <Menu fx:id="menuRun" text="Run">
+                <MenuItem fx:id="menuItemRunA" onAction="#calcA"/>
+                <MenuItem fx:id="menuItemRunB" onAction="#calcB"/>
+                <MenuItem fx:id="menuItemRunC" onAction="#calcC"/>
+            </Menu>
+            <Menu fx:id="menuOptions" text="Options">
+                <Menu fx:id="menuOptionsLanguage" text="Language">
+                    <RadioMenuItem fx:id="menuItemOptionsLanguageEnglish" onAction="#chooseLanguage"
+                                   text="English">
+                        <toggleGroup>
+                            <ToggleGroup fx:id="groupLanguages"/>
+                        </toggleGroup>
+                    </RadioMenuItem>
+                    <RadioMenuItem fx:id="menuItemOptionsLanguageUkrainian" onAction="#chooseLanguage"
+                                   text="Українська" toggleGroup="$groupLanguages" />
+                    <RadioMenuItem fx:id="menuItemOptionsLanguageRussian" visible="false"
+                                   onAction="#chooseLanguage"
+                                   text="Русский" toggleGroup="$groupLanguages"/>
+                </Menu>
+                <MenuItem fx:id="menuItemOptionsPreferences" onAction="#showOptions"/>
+            </Menu>
+            <Menu fx:id="menuHelp" text="Help">
+                <MenuItem fx:id="menuItemHelpAbout" onAction="#about" text="About"/>
+            </Menu>
+        </MenuBar>
+    </top>
+    <bottom>
+        <AnchorPane minHeight="40.0" maxWidth="Infinity" BorderPane.alignment="CENTER">
+            <CheckBox fx:id="checkBoxTimes" AnchorPane.topAnchor="5" AnchorPane.bottomAnchor="5"
+                      AnchorPane.leftAnchor="10" onAction="#checkBoxTimesClick"/>
+            <Button fx:id="buttonSaveReport" AnchorPane.topAnchor="5" AnchorPane.bottomAnchor="5" disable="true"
+                    AnchorPane.rightAnchor="5" mnemonicParsing="false" minWidth="150" onAction="#saveReport"/>
+        </AnchorPane>
+    </bottom>
+    <center>
+        <SplitPane dividerPositions="0.5" prefHeight="339.0" prefWidth="600.0"
+                   BorderPane.alignment="CENTER">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <SplitPane dividerPositions="0.58" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+                           AnchorPane.topAnchor="0" prefHeight="254">
+                    <VBox>
+                        <padding>
+                            <Insets bottom="2.0" left="14.0" right="2.0" top="2.0"/>
+                        </padding>
+                        <Label minHeight="25" fx:id="labelWRSName"/>
+                        <Label minHeight="25" fx:id="labelOperator"/>
+                        <Label minHeight="25" fx:id="labelStuff"/>
+                        <Label minHeight="25" fx:id="labelAmount"/>
+                        <Label minHeight="25" fx:id="labelOfficialStandardSample"/>
+                        <Label minHeight="25" fx:id="labelWrsDocument"/>
+                        <Label minHeight="25" fx:id="labelDate"/>
+                        <Label minHeight="25" fx:id="labelXPSS"/>
+                        <Label minHeight="25" fx:id="labelDeltaWRS"/>
+                        <Label minHeight="25" fx:id="labelNumber"/>
+                    </VBox>
+                    <VBox>
+                        <padding>
+                            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
+                        </padding>
+                        <TextField prefHeight="25.0" prefWidth="125.0" fx:id="textFieldWRSName"/>
+                        <TextField prefHeight="25.0" prefWidth="125.0" fx:id="textFieldOperator"/>
+                        <TextField prefHeight="25.0" prefWidth="125.0" fx:id="textFieldStuff"/>
+                        <TextField prefHeight="25.0" prefWidth="125.0" fx:id="textFieldAmount"/>
+                        <TextField prefHeight="25.0" prefWidth="125.0" fx:id="textFieldOfficialStandardSample"/>
+                        <TextField prefHeight="25.0" prefWidth="125.0" fx:id="textFieldWrsDocument"/>
+                        <TextField prefHeight="25.0" prefWidth="125.0" fx:id="textFieldDate"/>
+                        <TextField prefHeight="25.0" prefWidth="125.0" fx:id="textFieldXPSS"/>
+                        <TextField prefHeight="25.0" prefWidth="125.0" fx:id="textFieldDeltaWRS"/>
+                        <TextField prefHeight="25.0" prefWidth="125.0" fx:id="textFieldNumber"/>
+                    </VBox>
+                </SplitPane>
+                <Label fx:id="labelWeightsDilutions" AnchorPane.leftAnchor="14" AnchorPane.topAnchor="260"/>
+                <SplitPane dividerPositions="0.1" orientation="VERTICAL" AnchorPane.leftAnchor="0"
+                           AnchorPane.topAnchor="280" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+                    <TextArea fx:id="textAreaWeightsDilutions">
+
+                    </TextArea>
+                    <AnchorPane>
+                        <Label fx:id="labelSamples" AnchorPane.leftAnchor="14" AnchorPane.topAnchor="5"/>
+                        <ScrollPane fx:id="scrollPaneTables" AnchorPane.leftAnchor="5"
+                                    AnchorPane.topAnchor="25" AnchorPane.rightAnchor="5" AnchorPane.bottomAnchor="5">
+                            <AnchorPane fx:id="anchorPaneTables" AnchorPane.leftAnchor="5" AnchorPane.topAnchor="25"
+                                        AnchorPane.rightAnchor="5" AnchorPane.bottomAnchor="5">
+                                <TableView fx:id="tableViewLeft" minHeight="-Infinity" prefWidth="220"
+                                           AnchorPane.leftAnchor="10"/>
+                                <TableView fx:id="tableViewRight" minHeight="-Infinity" AnchorPane.rightAnchor="10"
+                                           AnchorPane.leftAnchor="230"/>
+                            </AnchorPane>
+                        </ScrollPane>
+                    </AnchorPane>
+                </SplitPane>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="420.0" prefHeight="160.0" prefWidth="500.0">
+                <Pane fx:id="paneRight" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+                    <Button fx:id="buttonA" layoutX="5.0" layoutY="2.0" mnemonicParsing="false" text="Button"
+                            textAlignment="CENTER" minHeight="80" wrapText="true" onAction="#calcA"/>
+                    <Button fx:id="buttonB" layoutY="2.0" mnemonicParsing="false" text="Button"
+                            textAlignment="CENTER" minHeight="80" wrapText="true" onAction="#calcB"/>
+                    <Button fx:id="buttonC" layoutY="2.0" mnemonicParsing="false" text="Button"
+                            textAlignment="CENTER" minHeight="80" wrapText="true" onAction="#calcC"/>
+                </Pane>
+                <AnchorPane fx:id="webViewPane"
+                            AnchorPane.bottomAnchor="0.0"
+                            AnchorPane.leftAnchor="0.0"
+                            AnchorPane.rightAnchor="0.0"
+                            AnchorPane.topAnchor="80.0">
+                </AnchorPane>
+            </AnchorPane>
+        </SplitPane>
+    </center>
+</BorderPane>

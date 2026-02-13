@@ -59,6 +59,7 @@ public class AttestationApplication extends Application {
         primaryStage.setOnShowing(Controller::loadOptions);
         Scene scene = new Scene(rootNode, 1295, 700);
         scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+        //primaryStage.getIcons().add(new Image(new ByteArrayInputStream(getJar().getResource("MainIcon.png"))));
         primaryStage.getIcons().add(new Image(new ByteArrayInputStream(getJar().getResource("MainIcon.png"))));
         primaryStage.setOnCloseRequest(Controller::closeCheck);
         primaryStage.setScene(scene);

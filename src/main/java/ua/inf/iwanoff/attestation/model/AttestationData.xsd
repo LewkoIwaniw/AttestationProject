@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+    <xsd:element name="WrsData">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element maxOccurs="unbounded" name="Sample">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element maxOccurs="unbounded" name="X">
+                                <xsd:complexType>
+                                    <xsd:attribute name="Value" type="xsd:double" use="required" />
+                                    <xsd:attribute name="Date" type="xsd:integer" use="required" />
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                        <xsd:attribute name="Name" type="xsd:string" use="required" />
+                        <xsd:attribute name="Flag" type="xsd:string" use="required" />
+                        <xsd:attribute name="Concentration" type="xsd:double" use="required" />
+                        <xsd:attribute name="Uncertainty" type="xsd:double" use="required" />
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="WeightsDilutions" type="xsd:string" />
+            </xsd:sequence>
+            <xsd:attribute name="SSName" type="xsd:string"/>
+            <xsd:attribute name="Operator" type="xsd:string" />
+            <xsd:attribute name="Stuff" type="xsd:string" />
+            <xsd:attribute name="Amount" type="xsd:string" />
+            <xsd:attribute name="OfficialStandardSample" type="xsd:string" />
+            <xsd:attribute name="Document" type="xsd:string" />
+            <xsd:attribute name="Date" type="xsd:string" />
+            <xsd:attribute name="Uncertainty" type="xsd:double" />
+            <xsd:attribute name="XPSS" type="xsd:double" />
+            <xsd:attribute name="DeltaWRS" type="xsd:double" />
+            <xsd:attribute name="DeltaUnit" type="xsd:double" />
+        </xsd:complexType>
+    </xsd:element>
+</xs:schema>
