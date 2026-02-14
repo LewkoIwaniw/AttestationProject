@@ -9,9 +9,8 @@ import ua.inf.iwanoff.utils.Result;
 import java.awt.*;
 import java.io.IOException;
 
-import static ua.inf.iwanoff.attestation.Controller.getJar;
 import static ua.inf.iwanoff.attestation.view.Strings.*;
-import static ua.inf.iwanoff.utils.FileUtils.createTempFromJar;
+import static ua.inf.iwanoff.utils.FileUtils.createTempFromResources;
 
 /**
  *
@@ -25,9 +24,9 @@ public class DocCalculations extends AbstractCalculations {
 
     private static void loadLetters() {
         if (!lettersLoaded) {
-            deltaSqrt = createTempFromJar(getJar(), deltaSqrt);
-            rsdUnit = createTempFromJar(getJar(), rsdUnit);
-            deltaUnit = createTempFromJar(getJar(), deltaUnit);
+            deltaSqrt = createTempFromResources("/" + deltaSqrt);
+            rsdUnit = createTempFromResources("/" + rsdUnit);
+            deltaUnit = createTempFromResources("/" + deltaUnit);
             lettersLoaded = true;
         }
     }

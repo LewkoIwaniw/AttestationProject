@@ -2,6 +2,8 @@ package ua.inf.iwanoff.attestation.model;
 
 import ua.inf.iwanoff.attestation.controller.Customer;
 import ua.inf.iwanoff.attestation.model.WrsData.DataType;
+import ua.inf.iwanoff.utils.FileUtils;
+import ua.inf.iwanoff.utils.GraphUtils;
 import ua.inf.iwanoff.utils.MultiString;
 import ua.inf.iwanoff.utils.Report;
 
@@ -11,7 +13,6 @@ import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 import java.io.*;
 
-import static ua.inf.iwanoff.attestation.Controller.getJar;
 import static ua.inf.iwanoff.attestation.model.AbstractCalculations.FLAG_ASCERTAINMENT;
 import static ua.inf.iwanoff.attestation.model.AbstractCalculations.FLAG_HOMOGENEITY;
 import static ua.inf.iwanoff.attestation.model.WrsData.getDataType;
@@ -203,7 +204,7 @@ public class AttestationProcessor {
 
     public String getLogoFileName() {
         String logoFileName = null;
-        byte[] buffer = getJar().getResource(customer.getLogotypeFile());
+        byte[] buffer = FileUtils.getBytes("/" + customer.getLogotypeFile());
         File tempFile = null;
         try {
             tempFile = File.createTempFile(customer.getLogotypeFile(), "");

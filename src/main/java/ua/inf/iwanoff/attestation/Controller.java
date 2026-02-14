@@ -12,8 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -26,18 +24,17 @@ import ua.inf.iwanoff.attestation.model.*;
 import ua.inf.iwanoff.attestation.view.OptionsWindow;
 import ua.inf.iwanoff.utils.CellData;
 import ua.inf.iwanoff.utils.ColumnData;
-import ua.inf.iwanoff.utils.JarResources;
 import ua.inf.iwanoff.utils.MultiString;
 
 import jakarta.xml.bind.JAXBException;
 
 import static ua.inf.iwanoff.attestation.view.Strings.*;
+import static ua.inf.iwanoff.utils.GraphUtils.getImageView;
 import static ua.inf.iwanoff.utils.StringUtils.dashAndName;
 import static ua.inf.iwanoff.utils.WindowUtils.*;
 import static ua.inf.iwanoff.utils.MultiString.*;
 import static ua.inf.iwanoff.utils.StringUtils.getPath;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -48,16 +45,7 @@ public class Controller implements Initializable {
     public static final boolean OPEN_DIALOG = true;
     public static final boolean SAVE_DIALOG = false;
 
-    private static JarResources jar = null;
     private ContextMenu contextMenu;
-
-    public static JarResources getJar() {
-        return jar == null ? jar = new JarResources("pictures.jar") : jar;
-    }
-
-    private static ImageView getImageView(String resourceName) {
-        return new ImageView(new Image(new ByteArrayInputStream(getJar().getResource(resourceName))));
-    }
 
     public static final int FIXED_ROWS = 4;
 

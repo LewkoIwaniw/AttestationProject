@@ -38,11 +38,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import ua.inf.iwanoff.attestation.Controller;
+import ua.inf.iwanoff.utils.GraphUtils;
 
 import java.io.ByteArrayInputStream;
 import java.util.Locale;
-
-import static ua.inf.iwanoff.attestation.Controller.getJar;
 
 public class AttestationApplication extends Application {
     private Parent rootNode;
@@ -59,8 +58,7 @@ public class AttestationApplication extends Application {
         primaryStage.setOnShowing(Controller::loadOptions);
         Scene scene = new Scene(rootNode, 1295, 700);
         scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-        //primaryStage.getIcons().add(new Image(new ByteArrayInputStream(getJar().getResource("MainIcon.png"))));
-        primaryStage.getIcons().add(new Image(new ByteArrayInputStream(getJar().getResource("MainIcon.png"))));
+        primaryStage.getIcons().add(GraphUtils.getImage("/MainIcon.png"));
         primaryStage.setOnCloseRequest(Controller::closeCheck);
         primaryStage.setScene(scene);
         primaryStage.centerOnScreen();
