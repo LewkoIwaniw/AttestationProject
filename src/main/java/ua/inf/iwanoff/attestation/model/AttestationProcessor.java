@@ -294,69 +294,11 @@ public class AttestationProcessor {
         return customer;
     }
 
-//    private Customer customer = new Customer(
-//            new MultiString("PJSC SIC \"Borshchahivskiy CPP\"",
-//                    "ПАТ НВЦ \"Борщагівський хіміко-фармацевтичний завод\"",
-//                    "ПАО НПЦ \"Борщаговский химико-фармацевтический завод\""),
-//            "borscanovsky_chphz.png");
-
-//    private Customer customer = new Customer(
-//            new MultiString("AT \"Astrapharm\" Ltd.",
-//                "ТОВ \"Астрафарм\"",
-//                "ООО \"Астрафарм\""),
-//            "Astrapharm.png");
-//
-//    private Customer customer = new Customer(
-//            new MultiString("S.C. Balkan Pharmaceuticals S.R.L.",
-//                    "S.C. Balkan Pharmaceuticals S.R.L.",
-//                    "S.C. Balkan Pharmaceuticals S.R.L."),
-//            "balkan.jpg");
-//
-//    private Customer customer = new Customer(
-//            new MultiString("Joint-stock company \"Galychpharm\"",
-//                    "АТ \"Галичфарм\"",
-//                    "АО \"Галичфарм\""),
-//            "Arterium.png");
-//    private Customer customer = new Customer(
-//            new MultiString("Kharkov Pharmaceutical Enterprise \"Zdorovya Narodu\" Ltd.",
-//                    "ТОВ Харківське фармацевтичне підприємство \"Здоров'я народу\"",
-//                    "ООО Харьковское фармацевтическое предприятие \"Здоровье народу\""),
-//            "ZdorovyaNarodu.png");
     private Customer customer = new Customer(
-            new MultiString("Corporation \"Zdorovya\" Ltd.",
-                    "Товариство з обмеженою відповідальністю Корпорація\"Здоров'я\"",
-                    "ООО Харьковское фармацевтическое предприятие \"Здоровье народу\""),
-            "ZdorovyaNarodu.png");
-//    private Customer customer = new Customer(
-//            new MultiString("\"Biopharma LLC\"",
-//                    "ТОВ ФЗ\"БІОФАРМА\"",
-//                    "ООО ФЗ\"БИОФАРМА\""),
-//            "biopharma.jpg");
-//    private Customer customer = new Customer(
-//            new MultiString("PJSC \"Chervona zirka\" Chemical & Pharmaceutical Plant",
-//                    "Публічне акціонерне товариство «Хімфармзавод «Червона зірка»",
-//                    "Публичное акционерное общество «Химфармзавод «Червона зірка»"),
-//            "zirka.png");
-//    private Customer customer = new Customer(
-//            new MultiString("JSC \"Lubnypharm\"",
-//                    "АТ \"Лубнифарм\"",
-//                    "АО \"Лубнифарм\""),
-//            "lubny.png");
-//    private Customer customer = new Customer(
-//            new MultiString("PJSC \"Monfarm\"",
-//                    "ПАТ \"Монфарм\"",
-//                    "ОАО \"Монфарм\""),
-//            "Monfarm.jpg");
-//    private Customer customer = new Customer(
-//            new MultiString("Novofarm-Biosynthes Ltd.",
-//                    "ТОВ фірма «Новофарм-Біосинтез»\n",
-//                    "ООО фирма «Новофарм-Биосинтез»\n"),
-//            "Novofarm_en.png", "Novofarm_ua.png", "Novofarm_ru.png");
-//    private Customer customer = new Customer(
-//            new MultiString("PJSC \"Lekhim-Kharkiv\"",
-//                    "ПрАТ «Лекхім-Харків»\n",
-//                    "ЧАО «Лекхим-Харьков»\n"),
-//            "Lekchim.jpg");
+            new MultiString("Ternopharm LLC",
+                    "ТОВ «Тернофарм»",
+                    "ТОВ «Тернофарм»"),
+            "Ternopharm.jpg");
     public static final String VERSION = "2.2";
 
 }

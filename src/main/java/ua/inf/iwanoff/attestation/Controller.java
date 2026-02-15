@@ -634,7 +634,7 @@ public class Controller implements Initializable {
     @FXML
     private void about() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setGraphic(getImageView("MainIcon.png"));
+        alert.setGraphic(getImageView("/MainIcon.png"));
         alert.setTitle(msAboutTitle.toString());
         alert.setHeaderText(msWrsAttestation + "\n\n" + msAboutText + AttestationProcessor.VERSION);
         alert.setContentText(msAllRightsReserved + " " + processor.getCustomer().getName());
