@@ -3,7 +3,6 @@ package ua.inf.iwanoff.attestation.model;
 import ua.inf.iwanoff.attestation.controller.Customer;
 import ua.inf.iwanoff.attestation.model.WrsData.DataType;
 import ua.inf.iwanoff.utils.FileUtils;
-import ua.inf.iwanoff.utils.GraphUtils;
 import ua.inf.iwanoff.utils.MultiString;
 import ua.inf.iwanoff.utils.Report;
 
@@ -133,11 +132,15 @@ public class AttestationProcessor {
              BufferedReader sr = new BufferedReader(isr)) {
             String line;
             while ((line = sr.readLine()) != null) {
+                System.out.println(line);
+                if (line.isEmpty()) {
+                    continue;
+                }
                 String[] arr = line.split("\\t");
                 String name = arr[0];
                 String c = arr[2];
                 String uncertainty = arr[3];
-                DataType flag = getDataType(arr[5].substring(0, 3));
+                DataType flag = getDataType(arr[5]/*.substring(0, 3)*/);
                 boolean added = false;
                 for (WrsData.Sample sample : newData.getSample()) {
                     if (name.equals(sample.getName()) && c.equals(sample.getConcentration()) &&
@@ -160,7 +163,9 @@ public class AttestationProcessor {
             data = newData;
             removeState(STATE_SAVED);
         }
-        catch (ArrayIndexOutOfBoundsException ex) {
+        catch (Exception ex) {
+        //catch (ArrayIndexOutOfBoundsException ex) {
+            ex.printStackTrace();
             throw new DataException.WrongFileFormat();
         }
     }
@@ -295,10 +300,15 @@ public class AttestationProcessor {
     }
 
     private Customer customer = new Customer(
-            new MultiString("Ternopharm LLC",
-                    "ТОВ «Тернофарм»",
-                    "ТОВ «Тернофарм»"),
-            "Ternopharm.jpg");
+            new MultiString("Micropharm LLC",
+                            "ТОВ «Мікрофарм»",
+                            "ТОВ «Мікрофарм»"),
+            "Micropharm.png");
+//    private Customer customer = new Customer(
+//            new MultiString("Ternopharm LLC",
+//                    "ТОВ «Тернофарм»",
+//                    "ТОВ «Тернофарм»"),
+//            "Ternopharm.jpg");
     public static final String VERSION = "2.2";
 
 }

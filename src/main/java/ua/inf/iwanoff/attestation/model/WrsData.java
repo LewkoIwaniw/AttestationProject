@@ -79,7 +79,7 @@ public class WrsData {
 
     public static DataType getDataType(String flag) {
         switch (flag) {
-            case "ФСО": case "ФСЗ": case "PRS":
+            case "ФСО": case "СО": case "ФСЗ": case "СЗ": case "PRS":
                 return DataType.PRS;
         }
         return DataType.WRS;
@@ -88,7 +88,7 @@ public class WrsData {
     public static String getDataTypeString(DataType flag) {
         switch (flag) {
             case PRS: return "PRS";
-            case WRS: return "RS";
+            case WRS: return "WRS";
         }
         return null;
     }
@@ -119,6 +119,17 @@ public class WrsData {
     private String deltaWRS = "0.5";
     @XmlAttribute(name = "DeltaUnit")
     private String deltaUnit = "0.5";
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
+
+    @XmlAttribute(name = "Protocol")
+    private String protocol = "";
 
     /**
      * Gets the value of the sample property.

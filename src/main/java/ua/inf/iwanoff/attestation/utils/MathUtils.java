@@ -7,11 +7,12 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import static java.lang.Math.sqrt;
+import static ua.inf.iwanoff.utils.MathUtils.sumOfSquares;
 
 public class MathUtils {
 
-    public static class BadData extends Exception { };
-    public static class NoData extends Exception { };
+    public static class BadData extends Exception { }
+    public static class NoData extends Exception { }
     public static class WrongTimeFormatException extends Exception { }
 
     public static final double epsilon = 0.00001;
@@ -73,42 +74,19 @@ public class MathUtils {
         }
     }
 
-    public static double Round(double d, int digitsCount)
-    {
-        if (digitsCount > 0 && digitsCount < 15)
-        {
-            double dC10 = 1;
-            for (int i = 0; i < digitsCount; i++)
-                dC10 *= 10;
-            long n = (long)(d * dC10 + (d > 0 ? 0.5 : -0.5));
-            d = n / dC10;
-        }
-        return d;
-    }
-
     public static double sum(double... arr) {
         return Arrays.stream(arr).sum();
     }
 
-    public static double sumOfSquares(double... arr) {
-        return Arrays.stream(arr).reduce(0, (x, y) -> x + y * y);
-    }
+//    public static double sumOfSquares(double... arr) {
+//        return Arrays.stream(arr).reduce(0, (x, y) -> x + y * y);
+//    }
 
     public static double squaredSum(double... arr) {
         double sum = Arrays.stream(arr).sum();
         return sum * sum;
     }
 
-    public static double[] deviations(double[] x) {
-        double[] d = new double[x.length];
-        double av = average(x);
-        for (int i = 0; i < x.length; i++)
-        {
-            if (av != 0)
-                d[i] = ((x[i] - av) / av) * 100;
-        }
-        return d;
-    }
     /**
      * Calculates integer power of floating point argument
      *

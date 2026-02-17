@@ -12,4 +12,5 @@ module ua.inf.iwanoff.attestation {
     opens ua.inf.iwanoff.attestation.controller to javafx.fxml, jakarta.xml.bind;
     opens ua.inf.iwanoff.attestation.model to javafx.fxml, jakarta.xml.bind;
     exports ua.inf.iwanoff.attestation;
+    exports ua.inf.iwanoff.attestation.controller;
 }

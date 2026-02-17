@@ -4,7 +4,7 @@ import ua.inf.iwanoff.utils.CellData;
 
 import javax.swing.table.AbstractTableModel;
 
-import static ua.inf.iwanoff.attestation.Controller.FIXED_ROWS;
+import static ua.inf.iwanoff.attestation.controller.Controller.FIXED_ROWS;
 import static ua.inf.iwanoff.attestation.view.Strings.msRS;
 import static ua.inf.iwanoff.attestation.view.Strings.msWRS;
 import static ua.inf.iwanoff.utils.StringUtils.addSpaces;

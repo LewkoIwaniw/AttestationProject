@@ -2,7 +2,7 @@ package ua.inf.iwanoff.attestation.model;
 
 import javax.swing.table.AbstractTableModel;
 
-import static ua.inf.iwanoff.attestation.Controller.FIXED_ROWS;
+import static ua.inf.iwanoff.attestation.controller.Controller.FIXED_ROWS;
 import static ua.inf.iwanoff.attestation.view.Strings.*;
 
 public class LeftTableModel extends AbstractTableModel {

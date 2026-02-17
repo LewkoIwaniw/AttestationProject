@@ -35,12 +35,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import ua.inf.iwanoff.attestation.Controller;
+import ua.inf.iwanoff.attestation.controller.Controller;
 import ua.inf.iwanoff.utils.GraphUtils;
 
-import java.io.ByteArrayInputStream;
 import java.util.Locale;
 
 public class AttestationApplication extends Application {

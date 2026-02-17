@@ -1,4 +1,4 @@
-package ua.inf.iwanoff.attestation;
+package ua.inf.iwanoff.attestation.controller;
 
 // TODO:
 // dynamically change table sizeSorted so scroll bars will be unnecessary
@@ -19,7 +19,6 @@ import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import ua.inf.iwanoff.attestation.controller.Options;
 import ua.inf.iwanoff.attestation.model.*;
 import ua.inf.iwanoff.attestation.view.OptionsWindow;
 import ua.inf.iwanoff.utils.CellData;
@@ -199,7 +198,7 @@ public class Controller implements Initializable {
         buttonC.prefWidthProperty().bind(paneRight.widthProperty().divide(3).subtract(5));
         addListener(this::modifyText, textFieldWRSName, textFieldOperator, textFieldStuff, textFieldAmount,
                 textFieldOfficialStandardSample, textFieldWrsDocument, textFieldDate, textFieldXPSS,
-                textFieldDeltaWRS, textAreaWeightsDilutions);
+                textFieldDeltaWRS, textFieldNumber, textAreaWeightsDilutions);
         controller = this;
         tableViewLeft.setFixedCellSize(22);
         tableViewRight.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY); // No influence!
@@ -259,6 +258,10 @@ public class Controller implements Initializable {
         }
         if (property.getBean().equals(textAreaWeightsDilutions)) {
             data().setWeightsDilutions(newValue);
+        }
+        if (property.getBean().equals(textFieldNumber)) {
+            data().setProtocol(newValue);
+            return;
         }
     }
 
@@ -402,6 +405,7 @@ public class Controller implements Initializable {
                     textFieldDate.setText(data().getDate());
                     textFieldXPSS.setText(data().getXPSS());
                     textFieldDeltaWRS.setText(data().getDeltaWRS());
+                    textFieldNumber.setText(data().getProtocol());
                     textAreaWeightsDilutions.setText(data().getWeightsDilutions());
                     processor.addState(AttestationProcessor.STATE_SAVED);
                 }
