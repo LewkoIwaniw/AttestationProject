@@ -136,7 +136,7 @@ public class WrsData {
      * 
      * <p>
      * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
+     * not a snapshot. Therefore, any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the sample property.
      * 
@@ -503,7 +503,7 @@ public class WrsData {
          * 
          * <p>
          * This accessor method returns a reference to the live list,
-         * not a snapshot. Therefore any modification you make to the
+         * not a snapshot. Therefore, any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the getX property.
          * 

@@ -261,7 +261,6 @@ public class Controller implements Initializable {
         }
         if (property.getBean().equals(textFieldNumber)) {
             data().setProtocol(newValue);
-            return;
         }
     }
 
@@ -478,7 +477,7 @@ public class Controller implements Initializable {
 
     @FXML
     private void save() {
-        if (currentFileName.length() == 0 || currentFileName.endsWith(".txt")) {
+        if (currentFileName.isEmpty() || currentFileName.endsWith(".txt")) {
             saveAs();
         }
         else {
@@ -691,7 +690,7 @@ public class Controller implements Initializable {
     }
 
     private void mouseMoved(MouseEvent mouseEvent) {
-        TablePosition pos = (TablePosition)tableViewLeft.getSelectionModel().getSelectedCells().get(0);
+        TablePosition<?, ?> pos = (TablePosition<?, ?>)tableViewLeft.getSelectionModel().getSelectedCells().getFirst();
         int row = pos.getRow();
         int col = pos.getColumn();
         System.out.println(row + " " + col);
@@ -754,7 +753,7 @@ public class Controller implements Initializable {
         }
         if (options.getReportOptions() != null) {
             Options.ReportOptions reportOptions = options.getReportOptions();
-            controller.processor.setOptionsData(new OptionsData(reportOptions.getCalcDisp().equals("true"),
+            processor.setOptionsData(new OptionsData(reportOptions.getCalcDisp().equals("true"),
                     reportOptions.getCalcHomo().equals("true"),
                     reportOptions.getCalcDrift().equals("true"),
                     (options.getReportOptions().getStudentSides() == 1 ?
@@ -764,18 +763,12 @@ public class Controller implements Initializable {
     }
 
     public static void stop() {
-        String lan = "";
-        switch (lang) {
-            case EN:
-                lan = "ENGLISH";
-                break;
-            case UA:
-                lan = "UKRAINIAN";
-                break;
-            case RU:
-                lan = "RUSSIAN";
-                break;
-        }
+        String lan = switch (lang) {
+            case EN -> "ENGLISH";
+            case UA -> "UKRAINIAN";
+            case RU -> "RUSSIAN";
+            default -> "";
+        };
         options.setLanguage(lan);
         //options.setCurrentDir(controller.getCurrentPath());
         if (primaryStage.getX() > 0 && primaryStage.getY() > 0) {
@@ -785,7 +778,7 @@ public class Controller implements Initializable {
             window.setWidth((int) (primaryStage.getWidth()));
             window.setHeight((int) (primaryStage.getHeight()));
         }
-        OptionsData optionsData = controller.processor.getOptionsData();
+        OptionsData optionsData = processor.getOptionsData();
         options.getReportOptions().setCalcDisp((optionsData.isVariancesEquality() + "").toLowerCase());
         options.getReportOptions().setCalcHomo((optionsData.isSamplesHomogeneity() + "").toLowerCase());
         options.getReportOptions().setCalcDrift((optionsData.isDrift() + "").toLowerCase());
@@ -800,9 +793,9 @@ public class Controller implements Initializable {
     public static void closeCheck(WindowEvent event) {
         if (!processor.isDataSaved()) {
             Boolean result = showConfirmDialog(msAttention, msDataNotSaved);
-            if (result != null && result == true) {
+            if (result != null && result) {
                 controller.save();
-                if (!controller.processor.isDataSaved()) {
+                if (!processor.isDataSaved()) {
                     result = null;
                 }
             }
@@ -813,7 +806,7 @@ public class Controller implements Initializable {
         }
         if (!processor.isReportSaved()) {
             Boolean result = showConfirmDialog(msAttention, msReportNotSaved);
-            if (result != null && result == true) {
+            if (result != null && result) {
                 controller.saveReport();
                 if (!processor.isReportSaved()) {
                     result = null;

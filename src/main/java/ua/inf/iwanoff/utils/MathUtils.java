@@ -72,7 +72,7 @@ public class MathUtils {
      * @param n - index of power
      * @return n-th power of getX
      */
-    public static final double power(double x, int n) {
+    public static double power(double x, int n) {
         if (x == 0 && n == 0)
             return 1;
         if (x == 0)

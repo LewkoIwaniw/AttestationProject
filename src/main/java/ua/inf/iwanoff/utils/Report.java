@@ -163,7 +163,7 @@ public class Report {
     }
 
     /**
-     * The main constructor that sets one of possible types (html / pdf)
+     * The main constructor that sets one of possible types (HTML / PDF)
      * @param docType
      */
     public Report(DocType docType) {

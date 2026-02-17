@@ -87,7 +87,7 @@ public class AttestationProcessor {
     }
 
     public void removeState(byte flag) {
-        state &= ~flag;
+        state &= (byte) ~flag;
         if (reactFunc != null) {
             reactFunc.run();
         }
@@ -178,7 +178,7 @@ public class AttestationProcessor {
     }
 
     public boolean setXPSS(String xpss) {
-        if (xpss.length() == 0) {
+        if (xpss.isEmpty()) {
             return true;
         }
         try {
@@ -193,7 +193,7 @@ public class AttestationProcessor {
     }
 
     public boolean setDeltaWRS(String deltaWRS) {
-        if (deltaWRS.length() == 0) {
+        if (deltaWRS.isEmpty()) {
             return true;
         }
         try {
@@ -208,9 +208,9 @@ public class AttestationProcessor {
     }
 
     public String getLogoFileName() {
-        String logoFileName = null;
+        String logoFileName;
         byte[] buffer = FileUtils.getBytes("/" + customer.getLogotypeFile());
-        File tempFile = null;
+        File tempFile;
         try {
             tempFile = File.createTempFile(customer.getLogotypeFile(), "");
             tempFile.deleteOnExit();
@@ -299,7 +299,7 @@ public class AttestationProcessor {
         return customer;
     }
 
-    private Customer customer = new Customer(
+    private final Customer customer = new Customer(
             new MultiString("Micropharm LLC",
                             "ТОВ «Мікрофарм»",
                             "ТОВ «Мікрофарм»"),
