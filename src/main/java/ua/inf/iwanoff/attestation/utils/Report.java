@@ -19,7 +19,6 @@ import java.io.IOException;
 
 public class Report {
     private String pageOf;
-    private DocType docType = DocType.HTML;
 
     public enum DocType {HTML, PDF}
 
@@ -44,9 +43,7 @@ public class Report {
 
     public static String spaces(int n) {
         StringBuilder sb = new StringBuilder("");
-        for (int i = 0; i < n; i++) {
-            sb.append(SPACE);
-        }
+        sb.append(SPACE.repeat(Math.max(0, n)));
         return sb.toString();
     }
 
@@ -115,7 +112,7 @@ public class Report {
     private Font font = FONT_NORMAL_10;
     private Font fontBold = FONT_BOLD_10;
     private Document document;
-    private ByteArrayOutputStream out = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
 //    public Report() {
 //    }
@@ -137,7 +134,7 @@ public class Report {
      */
     public Report(DocType docType) {
         document = new Document();
-        switch (this.docType = docType) {
+        switch (docType) {
             case HTML:
                 HtmlWriter.getInstance(document, out);
                 break;

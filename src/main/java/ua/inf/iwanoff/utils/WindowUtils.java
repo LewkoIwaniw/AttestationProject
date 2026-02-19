@@ -172,7 +172,7 @@ public class WindowUtils {
         if (model == null) {
             return;
         }
-        if (tableView.getColumns().size() > 0) {
+        if (!tableView.getColumns().isEmpty()) {
             rollback(tableView);
             tableView.getColumns().clear();
         }
@@ -240,7 +240,7 @@ public class WindowUtils {
 
     public static void synchronizeTables(TableView one, TableView two) {
         int index = one.getSelectionModel().getSelectedIndex();
-        System.out.println(index);
+        //System.out.println(index);
         if (index >= 0) {
             try {
                 two.getSelectionModel().select(index);

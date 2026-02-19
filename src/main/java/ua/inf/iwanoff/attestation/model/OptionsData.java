@@ -2,7 +2,7 @@ package ua.inf.iwanoff.attestation.model;
 
 public class OptionsData {
 
-    public enum OneTwo { ZERO, ONE, TWO };
+    public enum OneTwo { ZERO, ONE, TWO }
 
     private boolean variancesEquality;
     private boolean samplesHomogeneity;

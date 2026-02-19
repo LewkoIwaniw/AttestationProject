@@ -3,8 +3,8 @@ package ua.inf.iwanoff.attestation.controller;
 import ua.inf.iwanoff.utils.MultiString;
 
 public class Customer {
-    private MultiString name;
-    private String logotypeFile;
+    private final MultiString name;
+    private final String logotypeFile;
     private String logotypeFileEn;
     private String logotypeFileRu;
 

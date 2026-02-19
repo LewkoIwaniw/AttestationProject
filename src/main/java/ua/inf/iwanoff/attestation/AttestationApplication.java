@@ -68,7 +68,7 @@ public class AttestationApplication extends Application {
         Controller.stop();
     }
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         Locale.setDefault(new Locale("EN"));
         launch(args);
     }

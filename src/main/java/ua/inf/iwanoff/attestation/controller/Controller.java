@@ -122,12 +122,12 @@ public class Controller implements Initializable {
     @FXML private CheckBox checkBoxTimes;
     @FXML private Button buttonSaveReport;
 
-    private static AttestationProcessor processor = AttestationProcessor.getInstance();
+    private static final AttestationProcessor processor = AttestationProcessor.getInstance();
     private LeftTableModel leftTableModel = new LeftTableModel(processor);
     private RightTableModel rightTableModel = new RightTableModel(processor);
     public static String currentFileName = "";
-    private InvalidationListener leftSelectListener = this::synchronizeWithRight;
-    private InvalidationListener rightSelectListener = this::synchronizeWithLeft;
+    private final InvalidationListener leftSelectListener = this::synchronizeWithRight;
+    private final InvalidationListener rightSelectListener = this::synchronizeWithLeft;
 
     public static void setPrimaryStage(Stage primaryStage) {
         Controller.primaryStage = primaryStage;
@@ -176,7 +176,7 @@ public class Controller implements Initializable {
         checkBoxTimes.setText(msShowTimeValues.toString());
         buttonSaveReport.setText(msSaveReport.toString());
         if (primaryStage != null) {
-            if (currentFileName != null && currentFileName.length() > 0) {
+            if (currentFileName != null && !currentFileName.isEmpty()) {
                 primaryStage.setTitle(msWrsAttestation + " - " + currentFileName);
             }
             else {
@@ -564,11 +564,11 @@ public class Controller implements Initializable {
 
     private void calcABC(char schema) {
         webView.getEngine().loadContent("");
-        if (schema != 'C' && (textFieldXPSS.getText().length() == 0 || !processor.setXPSS(textFieldXPSS.getText()))) {
+        if (schema != 'C' && (textFieldXPSS.getText().isEmpty() || !processor.setXPSS(textFieldXPSS.getText()))) {
             showError(msWrongValueOfXPSS, msError);
             return;
         }
-        if (textFieldDeltaWRS.getText().length() == 0 || !processor.setDeltaWRS(textFieldDeltaWRS.getText())) {
+        if (textFieldDeltaWRS.getText().isEmpty() || !processor.setDeltaWRS(textFieldDeltaWRS.getText())) {
             showError(msWrongValueOfDeltaWRS, msError);
             return;
         }
@@ -693,14 +693,12 @@ public class Controller implements Initializable {
         TablePosition<?, ?> pos = (TablePosition<?, ?>)tableViewLeft.getSelectionModel().getSelectedCells().getFirst();
         int row = pos.getRow();
         int col = pos.getColumn();
-        System.out.println(row + " " + col);
+        //System.out.println(row + " " + col);
     }
 
     public static<T> T getValue(T k, T defaultValue) {
         return k == null ? defaultValue : k;
     }
-
-    private boolean cellModified = false;
 
     private void updateData(TableColumn.CellEditEvent<CellData[], String> event) {
         int col = event.getTablePosition().getColumn();
@@ -712,7 +710,6 @@ public class Controller implements Initializable {
 //            updateTable(tableViewRight, true, rightTableModel, "table-view", this::updateData, new ColumnData("1", 0.992));
 
             updateTables();
-            cellModified = true;
             processor.removeState(AttestationProcessor.STATE_SAVED);
         }
         else {

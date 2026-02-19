@@ -175,7 +175,7 @@ public class DocCalculations extends AbstractCalculations {
             report.newLine();
             report.createTable(cells, 100, 2, Color.WHITE);
             report.newLine();
-            if (data.getWeightsDilutions().length() > 0) {
+            if (!data.getWeightsDilutions().isEmpty()) {
                 report.text(msNO, Report.FONT_BOLD_12);
                 report.newLine();
                 cells = new Object[][]{{data.getWeightsDilutions()}};
@@ -523,7 +523,7 @@ public class DocCalculations extends AbstractCalculations {
         report.newLine();
         report.text(msConclusions, Report.FONT_BOLD_12);
         if (certifiedValue != null) {
-            if (data.getSSName().length() > 0) {
+            if (!data.getSSName().isEmpty()) {
                 report.text(msAccordingToTestResultsForWRS + " \"" + data.getSSName() + "\" " +
                         msEstablishedCertifiedValue + " " + certifiedValue + " %.", Report.FONT_NORMAL_12);
             }

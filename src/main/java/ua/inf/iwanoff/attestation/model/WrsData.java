@@ -78,19 +78,17 @@ public class WrsData {
     }
 
     public static DataType getDataType(String flag) {
-        switch (flag) {
-            case "ФСО": case "СО": case "ФСЗ": case "СЗ": case "PRS":
-                return DataType.PRS;
-        }
-        return DataType.WRS;
+        return switch (flag) {
+            case "ФСО", "СО", "ФСЗ", "СЗ", "PRS" -> DataType.PRS;
+            default -> DataType.WRS;
+        };
     }
 
     public static String getDataTypeString(DataType flag) {
-        switch (flag) {
-            case PRS: return "PRS";
-            case WRS: return "WRS";
-        }
-        return null;
+        return switch (flag) {
+            case PRS -> "PRS";
+            case WRS -> "WRS";
+        };
     }
 
     @XmlElement(name = "Sample", required = true)

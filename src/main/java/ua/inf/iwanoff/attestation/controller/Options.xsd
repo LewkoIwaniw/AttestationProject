@@ -3,7 +3,7 @@
     <xs:element name="Options">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="Window" minOccurs="0" maxOccurs="1">
+                <xs:element name="Window" minOccurs="0">
                     <xs:complexType>
                         <xs:attribute name="Left" type="xs:int" use="required" />
                         <xs:attribute name="Top" type="xs:int" use="required" />
@@ -20,7 +20,7 @@
             </xs:complexType>
             </xs:element>
             </xs:sequence>
-            <xs:attribute name="CurrentDir" type="xs:string" use="optional" />
+            <xs:attribute name="CurrentDir" type="xs:string" />
             <xs:attribute name="Language" type="xs:string" use="required" />
         </xs:complexType>
     </xs:element>

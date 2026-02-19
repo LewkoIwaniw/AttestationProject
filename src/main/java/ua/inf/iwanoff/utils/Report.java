@@ -146,10 +146,7 @@ public class Report {
     private Font font = FONT_NORMAL_10;
     private Font fontBold = FONT_BOLD_10;
     private Document document;
-    private ByteArrayOutputStream out = new ByteArrayOutputStream();
-
-//    public Report() {
-//    }
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
     /**
      * This is deprecated constructor used by DocumentProcessor class only
@@ -359,17 +356,12 @@ public class Report {
         table.setAlignment(Element.ALIGN_LEFT);
         if (header != null) {
             for (int j = 0; j < columnCount; j++) {
-                    String className = header[j].getClass().getName();
-                    switch (className) {
-                        case "com.lowagie.text.Phrase":
-                            cell = new Cell((Phrase) header[j]);
-                            break;
-                        case "com.lowagie.text.Cell":
-                            cell = (Cell) header[j];
-                            break;
-                        default:
-                            cell = new Cell(new Phrase(header[j] + "", fontBold));
-                    }
+                String className = header[j].getClass().getName();
+                cell = switch (className) {
+                    case "com.lowagie.text.Phrase" -> new Cell((Phrase) header[j]);
+                    case "com.lowagie.text.Cell" -> (Cell) header[j];
+                    default -> new Cell(new Phrase(header[j] + "", fontBold));
+                };
                 table.addCell(cell);
             }
         }
@@ -377,16 +369,11 @@ public class Report {
             for (int j = 0; j < columnCount; j++) {
                 if (j < tableData[i].length) {
                     String className = tableData[i][j].getClass().getName();
-                    switch (className) {
-                        case "com.lowagie.text.Phrase":
-                            cell = new Cell((Phrase) tableData[i][j]);
-                            break;
-                        case "com.lowagie.text.Cell":
-                            cell = (Cell) tableData[i][j];
-                            break;
-                        default:
-                            cell = new Cell(new Phrase(tableData[i][j] + "", font));
-                    }
+                    cell = switch (className) {
+                        case "com.lowagie.text.Phrase" -> new Cell((Phrase) tableData[i][j]);
+                        case "com.lowagie.text.Cell" -> (Cell) tableData[i][j];
+                        default -> new Cell(new Phrase(tableData[i][j] + "", font));
+                    };
                 } else {
                     cell = new Cell("");
                 }
@@ -402,16 +389,11 @@ public class Report {
             Cell cell;
             String className = cells[i].getClass().getName();
             try {
-                switch (className) {
-                    case "com.lowagie.text.Phrase":
-                        cell = new Cell((Phrase) cells[i]);
-                        break;
-                    case "com.lowagie.text.Cell":
-                        cell = (Cell) cells[i];
-                        break;
-                    default:
-                        cell = new Cell(new Phrase(cells[i] + "", fontBold));
-                }
+                cell = switch (className) {
+                    case "com.lowagie.text.Phrase" -> new Cell((Phrase) cells[i]);
+                    case "com.lowagie.text.Cell" -> (Cell) cells[i];
+                    default -> new Cell(new Phrase(cells[i] + "", fontBold));
+                };
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 result[i] = cell;
             }

@@ -50,7 +50,7 @@ public class MathUtils {
         while((s.charAt(0) <= '0' || s.charAt(0) > '9') && s.length() > 1) {
             s = s.substring(1);
         }
-        if (s.length() == 0 || s.charAt(0) != '1') {
+        if (s.charAt(0) != '1') {
             return 0;
         }
         return 1;
@@ -78,10 +78,6 @@ public class MathUtils {
         return Arrays.stream(arr).sum();
     }
 
-//    public static double sumOfSquares(double... arr) {
-//        return Arrays.stream(arr).reduce(0, (x, y) -> x + y * y);
-//    }
-
     public static double squaredSum(double... arr) {
         double sum = Arrays.stream(arr).sum();
         return sum * sum;
@@ -101,30 +97,6 @@ public class MathUtils {
             return 0;
         return n < 0 ? 1 / power(x, -n) : (n == 0 ? 1 : x * power(x, n - 1));
     }
-
-//    public static double Sum(double[] a)
-//    {
-//        double sum = 0;
-//        for (double getX : a)
-//        sum += getX;
-//        return sum;
-//    }
-//
-//    public static double Sum2(double[] a)
-//    {
-//        double sum = 0;
-//        for (double getX : a)
-//        sum += getX * getX;
-//        return sum;
-//    }
-
-//    public static double Average(double[] a)
-//    {
-//        double sum = 0;
-//        for (double getX : a)
-//        sum += getX;
-//        return sum / a.length;
-//    }
 
     public static double average(double[] a) {
         return Arrays.stream(a).average().getAsDouble();
@@ -181,8 +153,9 @@ public class MathUtils {
         if (c != 0)
         {
             double sum = 0;
-            for (int i = 0; i < a.length; i++)
-                sum += a[i] / c;
+            for (double v : a) {
+                sum += v / c;
+            }
             return sum / a.length;
         }
         else
@@ -233,9 +206,7 @@ public class MathUtils {
         return Math.sqrt(sum / r.length);
     }
 
-    public static double UnitedRelativeStandardDeviationU(double[] r, int[] f) /*throws BadData*/ {
-//        if (fp(f) < 1)
-//            throw new BadData();
+    public static double UnitedRelativeStandardDeviationU(double[] r, int[] f) {
         double sum = 0;
         for (int i = 0; i < r.length; i++)
             sum += (f[i] - 1) * r[i] * r[i];
@@ -255,43 +226,6 @@ public class MathUtils {
     }
 
     //------------------------------------------
-
-//    public static double sum_x(double[] getX)  // расчет для таблицы результатов дрейфа суммы х
-//    {
-//        double sum = 0;
-//        for (double v: getX)
-//        sum += v;
-//        return sum;
-//    }
-//
-//    public static double sum_x2(double[] getX)  // расчет для таблицы результатов дрейфа суммы х*getX
-//    {
-//        double sum = 0;
-//        for (double v: getX)
-//        sum += v * v;
-//        return sum;
-//    }
-
-//    public static double sum_time(double[] t)  // расчет для таблицы результатов дрейфа суммы time
-//    {
-//        double sum = 0;
-//        for (double time: t)
-//        {
-//            //time - time из  таблицы исходных данных
-//            sum += time;
-//        }
-//        return sum;
-//    }
-
-//    public static double sum_time2(double[] t)  // расчет для таблицы результатов дрейфа суммы time*time
-//    {
-//        double sum = 0;
-//        for (double time: t)
-//        {
-//            sum += time * time;
-//        }
-//        return sum;
-//    }
 
     public static double sum_x_time(double[] x, double[] t)  // расчет для таблицы результатов дрейфа суммы х*time
     {
@@ -535,7 +469,7 @@ public class MathUtils {
     public static int TimeToInt(String time) throws WrongTimeFormatException {
         if (time != null)
         {
-            if (time.length() < 1)
+            if (time.isEmpty())
                 return 0;
             if (time.length() <= 6)
                 return TimeToIntWithoutDate(time);
@@ -564,7 +498,7 @@ public class MathUtils {
     {
         if (time != null)
         {
-            if (time.length() < 1)
+            if (time.isEmpty())
                 return 0;
             String[] arr = {};// = time.split(new char[] { ' ', '_', '.' });
             if (arr.length < 2)
@@ -625,47 +559,47 @@ public static class Student {
             {
                     //side = 1     95.00    97.50   99.00   99.50     99.90    99.95
                     //side = 2     90.00    95.00   98.00   99.00     99.80    99.90
-      /* 01 */{1, 6.3138, 12.7062, 31.8205, 63.6567, 318.310, 636.619},
-      /* 02 */{2, 2.9200, 4.3027, 6.9646, 9.9248, 22.3271, 31.5991},
-      /* 03 */{3, 2.3534, 3.1824, 4.5407, 5.8409, 10.2145, 12.9240},
-      /* 04 */{4, 2.1318, 2.7764, 3.7469, 4.6041, 7.1732, 8.6103},
-      /* 05 */{5, 2.0150, 2.5706, 3.3649, 4.0321, 5.8934, 6.8688},
+                    /* 01 */{1, 6.3138, 12.7062, 31.8205, 63.6567, 318.310, 636.619},
+                    /* 02 */{2, 2.9200, 4.3027, 6.9646, 9.9248, 22.3271, 31.5991},
+                    /* 03 */{3, 2.3534, 3.1824, 4.5407, 5.8409, 10.2145, 12.9240},
+                    /* 04 */{4, 2.1318, 2.7764, 3.7469, 4.6041, 7.1732, 8.6103},
+                    /* 05 */{5, 2.0150, 2.5706, 3.3649, 4.0321, 5.8934, 6.8688},
 
-      /* 06 */{6, 1.9432, 2.4469, 3.1427, 3.7074, 5.2076, 5.9588},
-      /* 07 */{7, 1.8946, 2.3646, 2.9980, 3.4995, 4.7853, 5.4079},
-      /* 08 */{8, 1.8595, 2.3060, 2.8965, 3.3554, 4.5008, 5.0413},
-      /* 09 */{9, 1.8331, 2.2622, 2.8214, 3.2498, 4.2968, 4.7809},
-      /* 10 */{10, 1.8125, 2.2281, 2.7638, 3.1693, 4.1437, 5.5869},
+                    /* 06 */{6, 1.9432, 2.4469, 3.1427, 3.7074, 5.2076, 5.9588},
+                    /* 07 */{7, 1.8946, 2.3646, 2.9980, 3.4995, 4.7853, 5.4079},
+                    /* 08 */{8, 1.8595, 2.3060, 2.8965, 3.3554, 4.5008, 5.0413},
+                    /* 09 */{9, 1.8331, 2.2622, 2.8214, 3.2498, 4.2968, 4.7809},
+                    /* 10 */{10, 1.8125, 2.2281, 2.7638, 3.1693, 4.1437, 5.5869},
 
-      /* 11 */{11, 1.7956, 2.2010, 2.7181, 3.1058, 4.0247, 4.4370},
-      /* 12 */{12, 1.7823, 2.1788, 2.6810, 3.0545, 3.9296, 4.3178},
-      /* 13 */{13, 1.7709, 2.1604, 2.6503, 3.0123, 3.8520, 4.2208},
-      /* 14 */{14, 1.7613, 2.1448, 2.6245, 2.9768, 3.7874, 4.1405},
-      /* 15 */{15, 1.7530, 2.1314, 2.6025, 2.9467, 3.7328, 4.0728},
+                    /* 11 */{11, 1.7956, 2.2010, 2.7181, 3.1058, 4.0247, 4.4370},
+                    /* 12 */{12, 1.7823, 2.1788, 2.6810, 3.0545, 3.9296, 4.3178},
+                    /* 13 */{13, 1.7709, 2.1604, 2.6503, 3.0123, 3.8520, 4.2208},
+                    /* 14 */{14, 1.7613, 2.1448, 2.6245, 2.9768, 3.7874, 4.1405},
+                    /* 15 */{15, 1.7530, 2.1314, 2.6025, 2.9467, 3.7328, 4.0728},
 
-      /* 16 */{16, 1.7459, 2.1199, 2.5835, 2.9208, 3.6862, 4.0150},
-      /* 17 */{17, 1.7396, 2.1098, 2.5669, 2.8982, 3.6458, 3.9651},
-      /* 18 */{18, 1.7341, 2.1009, 2.5524, 2.8784, 3.6105, 3.9216},
-      /* 19 */{19, 1.7291, 2.0930, 2.5395, 2.8609, 3.5794, 3.8834},
-      /* 20 */{20, 1.7247, 2.0860, 2.5280, 2.8453, 3.5518, 3.8495},
+                    /* 16 */{16, 1.7459, 2.1199, 2.5835, 2.9208, 3.6862, 4.0150},
+                    /* 17 */{17, 1.7396, 2.1098, 2.5669, 2.8982, 3.6458, 3.9651},
+                    /* 18 */{18, 1.7341, 2.1009, 2.5524, 2.8784, 3.6105, 3.9216},
+                    /* 19 */{19, 1.7291, 2.0930, 2.5395, 2.8609, 3.5794, 3.8834},
+                    /* 20 */{20, 1.7247, 2.0860, 2.5280, 2.8453, 3.5518, 3.8495},
 
-      /* 21 */{21, 1.7207, 2.0796, 2.5176, 2.8314, 3.5272, 3.8193},
-      /* 22 */{22, 1.7171, 2.0739, 2.5083, 2.8188, 3.5050, 3.7921},
-      /* 23 */{23, 1.7139, 2.0687, 2.4999, 2.8073, 3.4850, 3.7676},
-      /* 24 */{24, 1.7109, 2.0639, 2.4922, 2.7969, 3.4668, 3.7454},
-      /* 25 */{25, 1.7081, 2.0595, 2.4851, 2.7874, 3.4502, 3.7251},
+                    /* 21 */{21, 1.7207, 2.0796, 2.5176, 2.8314, 3.5272, 3.8193},
+                    /* 22 */{22, 1.7171, 2.0739, 2.5083, 2.8188, 3.5050, 3.7921},
+                    /* 23 */{23, 1.7139, 2.0687, 2.4999, 2.8073, 3.4850, 3.7676},
+                    /* 24 */{24, 1.7109, 2.0639, 2.4922, 2.7969, 3.4668, 3.7454},
+                    /* 25 */{25, 1.7081, 2.0595, 2.4851, 2.7874, 3.4502, 3.7251},
 
-      /* 26 */{26, 1.7056, 2.0555, 2.4786, 2.7787, 3.4350, 3.7066},
-      /* 27 */{27, 1.7033, 2.0518, 2.4727, 2.7707, 3.4210, 3.6896},
-      /* 28 */{28, 1.7011, 2.0484, 2.4671, 2.7633, 3.4082, 3.6739},
-      /* 29 */{29, 1.6991, 2.0452, 2.4620, 2.7564, 3.3962, 3.6594},
-      /* 30 */{30, 1.6973, 2.0423, 2.4573, 2.7500, 3.3852, 3.6460},
+                    /* 26 */{26, 1.7056, 2.0555, 2.4786, 2.7787, 3.4350, 3.7066},
+                    /* 27 */{27, 1.7033, 2.0518, 2.4727, 2.7707, 3.4210, 3.6896},
+                    /* 28 */{28, 1.7011, 2.0484, 2.4671, 2.7633, 3.4082, 3.6739},
+                    /* 29 */{29, 1.6991, 2.0452, 2.4620, 2.7564, 3.3962, 3.6594},
+                    /* 30 */{30, 1.6973, 2.0423, 2.4573, 2.7500, 3.3852, 3.6460},
 
-      /* 40 */{40, 1.6839, 2.0211, 2.4233, 2.7045, 3.3069, 3.5510},
-      /* 50 */{50, 1.6759, 2.0086, 2.4033, 2.6778, 3.2614, 3.4960},
-      /* 100 */{100, 1.6602, 1.9840, 2.3642, 2.6259, 3.1737, 3.3905},
+                    /* 40 */{40, 1.6839, 2.0211, 2.4233, 2.7045, 3.3069, 3.5510},
+                    /* 50 */{50, 1.6759, 2.0086, 2.4033, 2.6778, 3.2614, 3.4960},
+                    /* 100 */{100, 1.6602, 1.9840, 2.3642, 2.6259, 3.1737, 3.3905},
 
-      /* 00 */{101, 1.6479, 1.9647, 2.3338, 2.5857, 3.1066, 3.3101}};
+                    /* 00 */{101, 1.6479, 1.9647, 2.3338, 2.5857, 3.1066, 3.3101}};
 
     static private double Inter(double f, int j) {
         int k = 0;
@@ -675,7 +609,7 @@ public static class Student {
                 break;
             }
         return St[k - 1][j] + (St[k][j] - St[k - 1][j]) * (f - St[k - 1][0])
-                / (St[k][0] - St[k - 1][0]);
+                              / (St[k][0] - St[k - 1][0]);
     }
 
     public static double calcStudent(int side, double f, double p) {
@@ -783,77 +717,12 @@ public static class Student {
     public static double calcPBasedOnStudent(int side, int f, double student) {
         return s(f, student);
     }
-
-
-    public static void main(String[] args) {
-      /* System.out.println("Side = 1");
-       System.out.println();
-       System.out.println("P = 95");
-       for (int i = 1; i < 10; i++)
-         System.out.println("n = " + i + " St = " + calcStudent(1, i, 95));
-       System.out.println();
-       System.out.println("P = 97.5");
-       for (int i = 1; i < 10; i++)
-         System.out.println("n = " + i + " St = " + calcStudent(1, i, 97.5));
-       System.out.println();
-       System.out.println("P = 99");
-       for (int i = 1; i < 10; i++)
-         System.out.println("n = " + i + " St = " + calcStudent(1, i, 99));
-       System.out.println();
-       System.out.println("P = 99.5");
-       for (int i = 1; i < 10; i++)
-         System.out.println("n = " + i + " St = " + calcStudent(1, i, 99.5));
-       System.out.println();
-       System.out.println("P = 99.9");
-       for (int i = 1; i < 10; i++)
-         System.out.println("n = " + i + " St = " + calcStudent(1, i, 99.9));
-       System.out.println();
-       System.out.println("P = 99.95");
-       for (int i = 1; i < 10; i++)
-         System.out.println("n = " + i + " St = " + calcStudent(1, i, 99.95));
-       System.out.println();
-       System.out.println("Side = 2");
-       System.out.println();
-       System.out.println("P = 90");
-       for (int i = 1; i < 10; i++)
-         System.out.println("n = " + i + " St = " + calcStudent(2, i, 90));
-       System.out.println();
-       System.out.println("P = 95");
-       for (int i = 1; i < 10; i++)
-         System.out.println("n = " + i + " St = " + calcStudent(2, i, 95));
-       System.out.println();
-       System.out.println("P = 98");
-       for (int i = 1; i < 10; i++)
-         System.out.println("n = " + i + " St = " + calcStudent(2, i, 98));
-       System.out.println();
-       System.out.println("P = 99");
-       for (int i = 1; i < 10; i++)
-         System.out.println("n = " + i + " St = " + calcStudent(2, i, 99));
-       System.out.println();
-       System.out.println("P = 99.8");
-       for (int i = 1; i < 10; i++)
-         System.out.println("n = " + i + " St = " + calcStudent(2, i, 99.8));
-       System.out.println();
-       System.out.println("P = 99.9");
-       for (int i = 1; i < 10; i++)
-         System.out.println("n = " + i + " St = " + calcStudent(2, i, 99.9));
-       System.out.println("St = " + St.length);*/
-        //System.out.println(s(1, 1));
-        //System.out.println(s(1, 6.31));
-        //System.out.println(s(2, 0.816));
-        //System.out.println(s(2, 2.92));
-        //System.out.println(s(120, 1.98));
-        //System.out.println(s(5, 114.98));
-        //System.out.println(s(4, 4.98));
-        //System.out.println(s(5,-1.22));
-    }
 }
-
     public static class Bartlett {
 
         static final int n_elem = 18;
 
-        enum AB {a, b};
+        enum AB {a, b}
 
         static class AB_pair {
             public double a, b;
@@ -1259,7 +1128,7 @@ public static class Student {
                     mm.m_ = mQ;
                     if (mQ <= mm.M) {
                         mm.uniformity = false;
-                    };
+                    }
                 }
             }
             return mm;

@@ -8,7 +8,7 @@ public class MultiString {
         return words[lang];
     }
 
-    private String[] words;
+    private final String[] words;
 
     public MultiString(String ... words) {
         this.words = words;

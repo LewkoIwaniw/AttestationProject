@@ -3,7 +3,6 @@ package ua.inf.iwanoff.utils;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.io.FileNotFoundException;
 import java.util.Objects;
 
 public class GraphUtils {

@@ -101,28 +101,19 @@ public class RightTableModel extends AbstractTableModel {
 
     private String getFlag(int columnIndex) {
         String result = processor.getData().getFlag(columnIndex);
-        switch (result.toUpperCase()) {
-            case "РСО": case "РСЗ": case "WRS": case "WSS":
-                return msWRS.toString();
-            case "СО": case "СЗ": case "ФСО": case "ФСЗ": case "RS": case "SS": case "PRS": case "PSS":
-                return msRS.toString();
-        }
-        return "";
+        return switch (result.toUpperCase()) {
+            case "РСО", "РСЗ", "WRS", "WSS" -> msWRS.toString();
+            case "СО", "СЗ", "ФСО", "ФСЗ", "RS", "SS", "PRS", "PSS" -> msRS.toString();
+            default -> "";
+        };
     }
 
     private void setFlag(int columnIndex, String prev, String s) {
-        String result;
-        switch (s.toUpperCase()) {
-            case "РСО": case "РСЗ": case "WRS": case "WSS":
-                result = "WRS";
-                break;
-            case "СО": case "СЗ": case "ФСО": case "ФСЗ": case "RS": case "SS": case "PRS": case "PSS":
-                result = "PRS";
-                break;
-            default:
-                result = prev;
-                break;
-        }
+        String result = switch (s.toUpperCase()) {
+            case "РСО", "РСЗ", "WRS", "WSS" -> "WRS";
+            case "СО", "СЗ", "ФСО", "ФСЗ", "RS", "SS", "PRS", "PSS" -> "PRS";
+            default -> prev;
+        };
         processor.getData().setFlag(columnIndex, result);
     }
 // processor.getData().getFlag(columnIndex)

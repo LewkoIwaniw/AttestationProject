@@ -59,8 +59,6 @@ public class AttestationProcessor {
         return (state & STATE_REPORT_SAVED) != 0;
     }
 
-    private DocCalculations calculations;
-
     public void setReactFunc(Runnable reactFunc) {
         this.reactFunc = reactFunc;
     }
@@ -132,7 +130,7 @@ public class AttestationProcessor {
              BufferedReader sr = new BufferedReader(isr)) {
             String line;
             while ((line = sr.readLine()) != null) {
-                System.out.println(line);
+                //System.out.println(line);
                 if (line.isEmpty()) {
                     continue;
                 }
@@ -232,7 +230,7 @@ public class AttestationProcessor {
 
     public byte[] calcABC(char schema, String fileName, String protocol) {
         lastSchema = schema;
-        calculations = new DocCalculations(getData(), customer.getName());
+        DocCalculations calculations = new DocCalculations(getData(), customer.getName());
         calculations.setImage(getLogoFileName());
         if (fileName == null) {
             calculations.setDocType(Report.DocType.HTML);

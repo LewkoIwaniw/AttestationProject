@@ -1,6 +1,5 @@
 package ua.inf.iwanoff.attestation.utils;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.util.Date;
@@ -35,7 +34,7 @@ public class StringUtils {
         while((s.charAt(0) <= '0' || s.charAt(0) > '9') && s.length() > 1) {
             s = s.substring(1);
         }
-        if (s.length() == 0 || s.charAt(0) != '1') {
+        if (s.isEmpty() || s.charAt(0) != '1') {
             return 0;
         }
         return 1;
@@ -97,21 +96,17 @@ public class StringUtils {
         return significant(value, significant);
     }
 
-    public static String str(double value, int significant, int aferPoint) {
-        return format("%" + significant + "." + aferPoint + "f", value);
+    public static String str(double value, int significant, int afterPoint) {
+        return format("%" + significant + "." + afterPoint + "f", value);
     }
 
     public static String today() {
-        String locale = "";
-        switch (MultiString.lang) {
-            case EN:
-                locale = "EN";
-                break;
-            case UA:
-                locale = "UA";
-                break;
-            case RU: locale = "RU";
-        }
+        String locale = switch (MultiString.lang) {
+            case EN -> "EN";
+            case UA -> "UA";
+            case RU -> "RU";
+            default -> "";
+        };
         return DateFormat.getDateInstance(DateFormat.FULL, new Locale(locale)).format(new Date());
     }
     /**

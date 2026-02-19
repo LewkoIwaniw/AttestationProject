@@ -1,6 +1,5 @@
 package ua.inf.iwanoff.utils;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 import static java.lang.Math.sqrt;
@@ -9,8 +8,10 @@ import static ua.inf.iwanoff.utils.StringUtils.value;
 
 public class MathUtils {
 
-    public static class BadData extends Exception { };
-    public static class NoData extends Exception { };
+    public static class BadData extends Exception { }
+
+    public static class NoData extends Exception { }
+
     public static class WrongTimeFormatException extends Exception { }
 
     public static final double epsilon = 0.00001;
@@ -163,9 +164,7 @@ public class MathUtils {
         return Math.sqrt(sum / r.length);
     }
 
-    public static double UnitedRelativeStandardDeviationU(double[] r, int[] f) /*throws BadData*/ {
-//        if (fp(f) < 1)
-//            throw new BadData();
+    public static double UnitedRelativeStandardDeviationU(double[] r, int[] f) {
         double sum = 0;
         for (int i = 0; i < r.length; i++)
             sum += (f[i] - 1) * r[i] * r[i];
@@ -545,7 +544,7 @@ public class MathUtils {
 
         static final int n_elem = 18;
 
-        enum AB {a, b};
+        enum AB {a, b}
 
         static class AB_pair {
             public double a, b;
@@ -951,7 +950,7 @@ public class MathUtils {
                     mm.m_ = mQ;
                     if (mQ <= mm.M) {
                         mm.uniformity = false;
-                    };
+                    }
                 }
             }
             return mm;
@@ -962,7 +961,7 @@ public class MathUtils {
         return x * x;
     }
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         for (int i = 0; i < 20; i++) {
             double d = (new Random().nextDouble() - 0.5) * 4000;
             System.out.printf("%12.6f    %12.6f %12.6f %12.6f    %12.6f %12.6f %12.6f \n",

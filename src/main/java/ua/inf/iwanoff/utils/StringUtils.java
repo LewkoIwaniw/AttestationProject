@@ -35,7 +35,7 @@ public class StringUtils {
         while((s.charAt(0) <= '0' || s.charAt(0) > '9') && s.length() > 1) {
             s = s.substring(1);
         }
-        if (s.length() == 0 || s.charAt(0) != '1') {
+        if (s.isEmpty() || s.charAt(0) != '1') {
             return 0;
         }
         return 1;
@@ -45,7 +45,7 @@ public class StringUtils {
      * Restricts the floating point value so it will be represented by the given count
      * of significant digits. If the first digit is "one", the result contains one more digit
      *
-     * @param x floatong point value
+     * @param x floating point value
      * @param digits count of significant digits
      * @return restricted value
      */
@@ -105,21 +105,17 @@ public class StringUtils {
         return significant(value, significant);
     }
 
-    public static String str(double value, int significant, int aferPoint) {
-        return format("%" + significant + "." + aferPoint + "f", value);
+    public static String str(double value, int significant, int afterPoint) {
+        return format("%" + significant + "." + afterPoint + "f", value);
     }
 
     public static String today() {
-        String locale = "";
-        switch (MultiString.lang) {
-            case EN:
-                locale = "EN";
-                break;
-            case UA:
-                locale = "UA";
-                break;
-            case RU: locale = "RU";
-        }
+        String locale = switch (MultiString.lang) {
+            case EN -> "EN";
+            case UA -> "UA";
+            case RU -> "RU";
+            default -> "";
+        };
         return DateFormat.getDateInstance(DateFormat.FULL, new Locale(locale)).format(new Date());
     }
     /**
@@ -157,7 +153,7 @@ public class StringUtils {
     {
         if (time != null)
         {
-            if (time.length() < 1)
+            if (time.isEmpty())
                 return 0;
             String[] arr = {};// = time.split(new char[] { ' ', '_', '.' });
             if (arr.length < 2)
@@ -174,7 +170,7 @@ public class StringUtils {
     public static Integer timeToInt(String time) {
         if (time != null)
         {
-            if (time.length() < 1)
+            if (time.isEmpty())
                 return 0;
             if (time.length() <= 6)
                 return TimeToIntWithoutDate(time);
@@ -207,7 +203,7 @@ public class StringUtils {
         return String.format("%-" + len + "s", s);
     }
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         String s = "hhd";
         System.out.println("|" + addSpaces(s, 10) + "|");
     }
