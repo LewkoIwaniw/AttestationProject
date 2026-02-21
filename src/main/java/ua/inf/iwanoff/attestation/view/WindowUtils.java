@@ -11,7 +11,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
-import ua.inf.iwanoff.attestation.utils.MultiString;
+import ua.inf.iwanoff.utils.MultiString;
 import static ua.inf.iwanoff.attestation.view.Strings.msError;
 
 public class WindowUtils {

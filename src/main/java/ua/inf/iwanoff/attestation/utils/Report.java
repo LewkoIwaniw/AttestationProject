@@ -8,6 +8,7 @@ import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
 import com.lowagie.text.pdf.PdfWriter;
+import ua.inf.iwanoff.utils.MultiString;
 
 import java.awt.*;
 import java.io.ByteArrayInputStream;
