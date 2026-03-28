@@ -297,16 +297,16 @@ public class AttestationProcessor {
         return customer;
     }
 
-    private final Customer customer = new Customer(
-            new MultiString("Micropharm LLC",
-                            "ТОВ «Мікрофарм»",
-                            "ТОВ «Мікрофарм»"),
-            "Micropharm.png");
-//    private Customer customer = new Customer(
-//            new MultiString("Ternopharm LLC",
-//                    "ТОВ «Тернофарм»",
-//                    "ТОВ «Тернофарм»"),
-//            "Ternopharm.jpg");
+//    private final Customer customer = new Customer(
+//            new MultiString("Micropharm LLC",
+//                            "ТОВ «Мікрофарм»",
+//                            "ТОВ «Мікрофарм»"),
+//            "Micropharm.png");
+    private Customer customer = new Customer(
+            new MultiString("Ternopharm LLC",
+                    "ТОВ «Тернофарм»",
+                    "ТОВ «Тернофарм»"),
+            "Ternopharm.jpg");
     public static final String VERSION = "2.2";
 
 }

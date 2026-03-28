@@ -421,7 +421,6 @@ public class Controller implements Initializable {
                 e.printStackTrace();
                 showError(msWrongFormat, msError);
             }
-
         }
     }
 
@@ -687,6 +686,7 @@ public class Controller implements Initializable {
         tableViewRight.getSelectionModel().selectedItemProperty().removeListener(rightSelectListener);
         updateTable(tableViewRight, true, rightTableModel,  "table-view", this::updateData, titles);
         tableViewRight.getSelectionModel().selectedItemProperty().addListener(rightSelectListener);
+        tableViewRight.setMinWidth(scrollPaneTables.getWidth() - tableViewLeft.getWidth() - 34); ////!!!!
     }
 
     private void mouseMoved(MouseEvent mouseEvent) {

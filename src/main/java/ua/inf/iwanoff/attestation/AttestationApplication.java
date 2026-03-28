@@ -52,6 +52,7 @@ public class AttestationApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Locale.setDefault(new Locale("EN"));
         Controller.setPrimaryStage(primaryStage);
         primaryStage.setOnShowing(Controller::loadOptions);
         Scene scene = new Scene(rootNode, 1295, 700);
@@ -66,10 +67,5 @@ public class AttestationApplication extends Application {
     @Override
     public void stop() throws Exception {
         Controller.stop();
-    }
-
-    static void main(String[] args) {
-        Locale.setDefault(new Locale("EN"));
-        launch(args);
     }
 }
