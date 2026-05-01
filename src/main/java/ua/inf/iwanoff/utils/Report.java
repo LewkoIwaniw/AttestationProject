@@ -3,6 +3,7 @@ package ua.inf.iwanoff.utils;
 import com.lowagie.text.*;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
+import com.lowagie.text.alignment.HorizontalAlignment;
 import com.lowagie.text.html.HtmlWriter;
 import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfReader;
@@ -88,7 +89,7 @@ public class Report {
         for (Object part : parts) {
             switch (part.getClass().getName()) {
                 case "com.lowagie.text.Chunk":
-                    phrase.add(part);
+                    phrase.add((Chunk) part);
                     break;
                 default:
                     phrase.add(new Chunk(part + ""));
@@ -266,7 +267,7 @@ public class Report {
         if (widths != null && widths.length > 0) {
             table.setWidths(widths);
         }
-        table.setAlignment(Element.ALIGN_LEFT);
+        table.setHorizontalAlignment(HorizontalAlignment.LEFT);
         /*Add Header*/
         if (columnName != null) {
             for (int i = 0; i < columnName.length; i++) {
@@ -353,7 +354,7 @@ public class Report {
         if (widths != null && widths.length > 0) {
             table.setWidths(widths);
         }
-        table.setAlignment(Element.ALIGN_LEFT);
+        table.setHorizontalAlignment(HorizontalAlignment.LEFT);
         if (header != null) {
             for (int j = 0; j < columnCount; j++) {
                 String className = header[j].getClass().getName();
@@ -394,7 +395,7 @@ public class Report {
                     case "com.lowagie.text.Cell" -> (Cell) cells[i];
                     default -> new Cell(new Phrase(cells[i] + "", fontBold));
                 };
-                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cell.setHorizontalAlignment(HorizontalAlignment.CENTER);
                 result[i] = cell;
             }
             catch (DocumentException e) {
@@ -479,7 +480,7 @@ public class Report {
         if (widths != null && widths.length > 0) {
             table.setWidths(widths);
         }
-        table.setAlignment(Element.ALIGN_CENTER);
+        table.setHorizontalAlignment(HorizontalAlignment.LEFT);
         /*Add Header*/
         if (columnName != null) {
             for (int i = 0; i < columnName.length; i++) {

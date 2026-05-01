@@ -2,6 +2,8 @@ package ua.inf.iwanoff.attestation.model;
 
 import com.lowagie.text.*;
 import com.lowagie.text.Image;
+import com.lowagie.text.alignment.HorizontalAlignment;
+import com.lowagie.text.alignment.VerticalAlignment;
 import ua.inf.iwanoff.utils.MultiString;
 import ua.inf.iwanoff.utils.Report;
 import ua.inf.iwanoff.utils.Result;
@@ -106,12 +108,12 @@ public class DocCalculations extends AbstractCalculations {
                 Image img = Image.getInstance(image);
                 leftCell.addElement(new Chunk(img, 0, 0));
             }
-            leftCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-            leftCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            leftCell.setHorizontalAlignment(HorizontalAlignment.CENTER);
+            leftCell.setVerticalAlignment(VerticalAlignment.CENTER);
             leftCell.setBorderColor(Color.white);
             Cell rightCell = new Cell(new Phrase(customer.toString(), Report.FONT_BOLD_14));
-            rightCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-            rightCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            rightCell.setHorizontalAlignment(HorizontalAlignment.CENTER);
+            rightCell.setVerticalAlignment(VerticalAlignment.CENTER);
             rightCell.setBorderColor(Color.white);
             Cell[][] cells = {{ leftCell, rightCell }};
             report.createTable(null, null, null, 100, cells, 4, Color.white);
@@ -126,7 +128,7 @@ public class DocCalculations extends AbstractCalculations {
     private boolean addTitle() {
         try {
             Cell cell = new Cell(new Phrase(title, Report.FONT_BOLD_14));
-            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setHorizontalAlignment(HorizontalAlignment.CENTER);
             cell.setBorderColor(Color.white);
             Object[][] cells = {{cell}};
             report.newLine();
@@ -169,7 +171,7 @@ public class DocCalculations extends AbstractCalculations {
     protected void showSourceTable() {
         try {
             Cell cell = new Cell(new Phrase(msED.toString(), Report.FONT_BOLD_12));
-            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setHorizontalAlignment(HorizontalAlignment.CENTER);
             cell.setBorderColor(Color.white);
             Object[][] cells = {{cell}};
             report.newLine();

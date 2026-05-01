@@ -4,7 +4,7 @@ module ua.inf.iwanoff.attestation {
     requires javafx.web;
     requires jakarta.xml.bind;
     requires java.datatransfer;
-    requires itext;
+    requires com.github.librepdf.openpdf;
     requires java.desktop;
 
 
