@@ -376,6 +376,18 @@ public class Strings {
                     "Use Student's test for homogeneity of the WRS (P = 95%)",
                     "Використовувати критерій Стьюдента для однорідності РСЗ (P = 95%)",
                     "Использовать критерий Стьюдента для однородности РСО (P = 95%)"),
+            msUseUnuits = new MultiString(
+                    "Units of certified value",
+                    "Одиниці атестованого значення",
+                    "Единицы аттестованого значения"),
+            msMgMl = new MultiString(
+                    "Mg / Ml",
+                    "Мг / Мл",
+                    "Мг / Мл"),
+            msPercents = new MultiString(
+                    "Percents",
+                    "Проценти",
+                    "Проценты"),
             msOptions = new MultiString("Options", "Опції", "Опции"),
             msCertifiedValueOfRSIsMissed = new MultiString(
                     "Certified value of RS is missed",

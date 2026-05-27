@@ -16,6 +16,9 @@ public class OptionsWindow {
     private final Label labelUseStudentsTest;
     private final RadioButton radioButtonOneSided;
     private final RadioButton radioButtonTwoSided;
+    private final Label labelUseUnits;
+    private final RadioButton radioButtonMgMl;
+    private final RadioButton radioButtonPercents;
     private OptionsData optionsData;
 
     public OptionsWindow(int language) {
@@ -32,9 +35,18 @@ public class OptionsWindow {
         radioButtonOneSided.setPadding(new Insets(5, 10, 5, 30));
         radioButtonTwoSided = new RadioButton(msTwoSidedStudent_sTTest.get(language));
         radioButtonTwoSided.setPadding(new Insets(5, 10, 5, 30));
+        labelUseUnits = new Label(msUseUnuits.get(language));
+        labelUseUnits.setPadding(new Insets(20, 10, 5, 10));
+        radioButtonMgMl = new RadioButton(msMgMl.get(language));
+        radioButtonMgMl.setPadding(new Insets(5, 10, 5, 30));
+        radioButtonPercents = new RadioButton(msPercents.get(language));
+        radioButtonPercents.setPadding(new Insets(5, 10, 5, 30));
         ToggleGroup toggleGroup = new ToggleGroup();
         radioButtonOneSided.setToggleGroup(toggleGroup);
         radioButtonTwoSided.setToggleGroup(toggleGroup);
+        toggleGroup = new ToggleGroup();
+        radioButtonMgMl.setToggleGroup(toggleGroup);
+        radioButtonPercents.setToggleGroup(toggleGroup);
     }
 
     public OptionsData show(OptionsData optionsData) {
@@ -53,6 +65,9 @@ public class OptionsWindow {
         pane.getChildren().add(labelUseStudentsTest);
         pane.getChildren().add(radioButtonOneSided);
         pane.getChildren().add(radioButtonTwoSided);
+        pane.getChildren().add(labelUseUnits);
+        pane.getChildren().add(radioButtonMgMl);
+        pane.getChildren().add(radioButtonPercents);
         dialog.getDialogPane().setContent(pane);
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         dialog.setResultConverter(this::getResult);
