@@ -754,7 +754,8 @@ public class Controller implements Initializable {
                     reportOptions.getCalcHomo().equals("true"),
                     reportOptions.getCalcDrift().equals("true"),
                     (options.getReportOptions().getStudentSides() == 1 ?
-                            OptionsData.OneTwo.ONE : OptionsData.OneTwo.TWO)));
+                            OptionsData.OneTwo.ONE : OptionsData.OneTwo.TWO),
+                    (reportOptions.getUnits().equals("mg_ml") ? OptionsData.Units.MG_ML : OptionsData.Units.PERCENTS)));
         }
         controller.switchLanguage();
     }
@@ -780,6 +781,7 @@ public class Controller implements Initializable {
         options.getReportOptions().setCalcHomo((optionsData.isSamplesHomogeneity() + "").toLowerCase());
         options.getReportOptions().setCalcDrift((optionsData.isDrift() + "").toLowerCase());
         options.getReportOptions().setStudentSides(optionsData.getSides().ordinal());
+        options.getReportOptions().setUnits((optionsData.getUnits() + "").toLowerCase());
         options.saveOptions(System.getenv("USERPROFILE") + "\\WRS_ini.options");
     }
 

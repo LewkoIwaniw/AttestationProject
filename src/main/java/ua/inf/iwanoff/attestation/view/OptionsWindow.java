@@ -59,6 +59,8 @@ public class OptionsWindow {
         checkBoxDrift.setSelected(optionsData.isDrift());
         radioButtonOneSided.setSelected(optionsData.getSides() == OptionsData.OneTwo.ONE);
         radioButtonTwoSided.setSelected(optionsData.getSides() == OptionsData.OneTwo.TWO);
+        radioButtonMgMl.setSelected(optionsData.getUnits() == OptionsData.Units.MG_ML);
+        radioButtonPercents.setSelected(optionsData.getUnits() == OptionsData.Units.PERCENTS);
         pane.getChildren().add(checkBoxVariancesEquality);
         pane.getChildren().add(checkBoxSamplesHomogeneity);
         pane.getChildren().add(checkBoxDrift);
@@ -81,6 +83,7 @@ public class OptionsWindow {
             optionsData.setSamplesHomogeneity(checkBoxSamplesHomogeneity.isSelected());
             optionsData.setDrift(checkBoxDrift.isSelected());
             optionsData.setSides(radioButtonOneSided.isSelected() ? OptionsData.OneTwo.ONE : OptionsData.OneTwo.TWO);
+            optionsData.setUnits(radioButtonMgMl.isSelected() ? OptionsData.Units.MG_ML : OptionsData.Units.PERCENTS);
         }
         return optionsData;
     }

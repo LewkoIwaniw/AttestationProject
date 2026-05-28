@@ -212,6 +212,8 @@ public class Options {
         private String calcDrift;
         @XmlAttribute(name = "StudentSides", required = true)
         private int studentSides = 1;
+        @XmlAttribute(name = "Units", required = false)
+        private String units = "mg_ml";
 
         /**
          * Gets the value of the calcDisp property.
@@ -301,6 +303,13 @@ public class Options {
             this.studentSides = value;
         }
 
+        public String getUnits() {
+            return units;
+        }
+
+        public void setUnits(String units) {
+            this.units = units;
+        }
     }
 
 
