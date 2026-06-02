@@ -213,7 +213,7 @@ public class Options {
         @XmlAttribute(name = "StudentSides", required = true)
         private int studentSides = 1;
         @XmlAttribute(name = "Units", required = false)
-        private String units = "mg_ml";
+        private String units = "percents";
 
         /**
          * Gets the value of the calcDisp property.

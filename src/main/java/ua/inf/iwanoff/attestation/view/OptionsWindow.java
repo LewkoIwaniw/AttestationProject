@@ -68,8 +68,8 @@ public class OptionsWindow {
         pane.getChildren().add(radioButtonOneSided);
         pane.getChildren().add(radioButtonTwoSided);
         pane.getChildren().add(labelUseUnits);
-        pane.getChildren().add(radioButtonMgMl);
         pane.getChildren().add(radioButtonPercents);
+        pane.getChildren().add(radioButtonMgMl);
         dialog.getDialogPane().setContent(pane);
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         dialog.setResultConverter(this::getResult);

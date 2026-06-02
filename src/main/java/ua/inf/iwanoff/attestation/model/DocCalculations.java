@@ -146,6 +146,7 @@ public class DocCalculations extends AbstractCalculations {
             report.newLine();
             Object[][] cells = {{ title , msNumber + " " + protocol }, { data.getSSName(), "" }};
             report.createTable(cells, 100, 2, Color.BLACK);
+            MultiString rs = optionsData.getUnits() ==  OptionsData.Units.MG_ML ? msCertifiedValueOfRS_mm : msCertifiedValueOfRS_pr;
             cells = new Object[][] {
                     { msNRSO, data.getSSName() },
                     { msOperator, data.getOperator() },
@@ -154,7 +155,7 @@ public class DocCalculations extends AbstractCalculations {
                     { msOfficialReferenceSample, data.getOfficialStandardSample() },
                     { msWrsDocument, data.getDocument() },
                     { msTestDate, data.getDate() },
-                    { msCertifiedValueOfRS, data.getXPSS() },
+                    { rs, data.getXPSS() },
                     { msDeltaWRS, data.getDeltaWRS() }
             };
             report.newLine();
@@ -241,8 +242,10 @@ public class DocCalculations extends AbstractCalculations {
                     { pssAverNormalized, wrsAverNormalized}
             });
             report.newLine();
+            MultiString rs = optionsData.getUnits() ==  OptionsData.Units.MG_ML ? msCertifiedValueOfRS_mm : msCertifiedValueOfRS_pr;
+            MultiString wrs = optionsData.getUnits() ==  OptionsData.Units.MG_ML ? msAZRSOS_mm : msAZRSOS_pr;
             report.createTable(new Object[][]{
-                    {msCertifiedValueOfRS, msAZRSOS},
+                    {rs, wrs},
                     {Result.create(3).setValue(Double.parseDouble(data.getXPSS())), wssSV}
             });
         }
@@ -524,14 +527,15 @@ public class DocCalculations extends AbstractCalculations {
     protected void showConclusions() {
         report.newLine();
         report.text(msConclusions, Report.FONT_BOLD_12);
+        MultiString percent_mm = optionsData.getUnits() ==  OptionsData.Units.MG_ML ? msMgML : msPercent;
         if (certifiedValue != null) {
             if (!data.getSSName().isEmpty()) {
                 report.text(msAccordingToTestResultsForWRS + " \"" + data.getSSName() + "\" " +
-                        msEstablishedCertifiedValue + " " + certifiedValue + " %.", Report.FONT_NORMAL_12);
+                        msEstablishedCertifiedValue + " " + certifiedValue + percent_mm, Report.FONT_NORMAL_12);
             }
             else {
                 report.text(msAccordingToTestResultsForWRS + " " + msEstablishedCertifiedValue + " "
-                        + certifiedValue + " %.", Report.FONT_NORMAL_12);
+                        + certifiedValue + percent_mm, Report.FONT_NORMAL_12);
             }
         }
         if ((flag & FLAG_ASCERTAINMENT) != 0) {
@@ -550,7 +554,7 @@ public class DocCalculations extends AbstractCalculations {
         report.newLine();
         report.createTable(new Object[][] {
                 { "", msAppointmentName, msSignature },
-                { msReportWasPreparedBy, "", "" },
+                { msReportWasPreparedBy, data.getOperator(), "" },
                 { msReportWasCheckedBy, "", "" }
         });
     }

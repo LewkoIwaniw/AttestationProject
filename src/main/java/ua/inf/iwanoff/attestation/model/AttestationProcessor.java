@@ -302,16 +302,16 @@ public class AttestationProcessor {
 //                            "ТОВ «Мікрофарм»",
 //                            "ТОВ «Мікрофарм»"),
 //            "Micropharm.png");
-//    private Customer customer = new Customer(
-//            new MultiString("Ternopharm LLC",
-//                    "ТОВ «Тернофарм»",
-//                    "ТОВ «Тернофарм»"),
-//            "Ternopharm.jpg");
     private Customer customer = new Customer(
-        new MultiString("PJSC SIC \"Borshchahivskiy CPP\"",
-                "ПАТ НВЦ \"Борщагівський хіміко-фармацевтичний завод\"",
-                "ПАО НПЦ \"Борщаговский химико-фармацевтический завод\""),
-        "borscanovsky_chphz.png");
-    public static final String VERSION = "2.2";
+            new MultiString("Ternopharm LLC",
+                    "ТОВ «Тернофарм»",
+                    "ТОВ «Тернофарм»"),
+            "Ternopharm.jpg");
+//  private Customer customer = new Customer(
+//    new MultiString("PJSC SIC \"Borshchahivskiy CPP\"",
+//            "ПАТ НВЦ \"Борщагівський хіміко-фармацевтичний завод\"",
+//            "ПАО НПЦ \"Борщаговский химико-фармацевтический завод\""),
+//    "borscanovsky_chphz.png");
+    public static final String VERSION = "2.2.02";
 
 }

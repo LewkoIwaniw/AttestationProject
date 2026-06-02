@@ -50,7 +50,7 @@ public class Controller implements Initializable {
 
     private static Stage primaryStage;
     private static Controller controller;
-    private static Options options = new Options();
+    public static Options options = new Options();
 
     @FXML private Menu menuFile;
     @FXML private MenuItem menuItemFileNew;
@@ -163,7 +163,8 @@ public class Controller implements Initializable {
         labelOfficialStandardSample.setText(msOfficialReferenceSample.toString());
         labelWrsDocument.setText(msWrsDocument.toString());
         labelDate.setText(msTestDate.toString());
-        labelXPSS.setText(msCertifiedValueOfRS.toString());
+        labelXPSS.setText(msCertifiedValueOfRS_mm.toString());
+        labelXPSS.setText(msCertifiedValueOfRS_pr.toString());
         labelDeltaWRS.setText(msDeltaWRS.toString());
         labelNumber.setText(msProtocolNumber.toString());
         labelWeightsDilutions.setStyle("-fx-font-weight: bold;");

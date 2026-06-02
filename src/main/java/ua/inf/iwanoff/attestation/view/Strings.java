@@ -2,9 +2,19 @@ package ua.inf.iwanoff.attestation.view;
 
 import ua.inf.iwanoff.utils.MultiString;
 
-public class Strings {
-    public static final String VERSION = "2.01";
+import static ua.inf.iwanoff.attestation.controller.Controller.options;
 
+public class Strings {
+
+    private static String procMgML() {
+        String mgML = options.getLanguage().equalsIgnoreCase("ENGLISH") ? "mg/ML": "мг/мл";
+        return options.getReportOptions().getUnits().equalsIgnoreCase("percent") ? "%": mgML;
+    }
+
+    private static String prEn = options.getReportOptions().getUnits().equalsIgnoreCase("percents") ? "%": "mg/mL";
+    private static String prUa = options.getReportOptions().getUnits().equalsIgnoreCase("percents") ? "%": "мг/мл";
+    public static final MultiString msPercent = new MultiString(" %.", " %.", " %.");
+    public static final MultiString msMgML = new MultiString(" mg/mL.", " мг/мл.", " мг/мл.");
     public static final MultiString
             msWrsAttestation = new MultiString("WRS Attestation", "Атестація РСЗ", "Аттестация РСО"),
             msMFile = new MultiString("_File", "_Файл", "_Файл"),
@@ -128,10 +138,14 @@ public class Strings {
                     "Normalized average of WRS",
                     "Нормалізоване середнє значення РСЗ",
                     "Нормализованное среднее значение РСО"),
-            msCertifiedValueOfRS = new MultiString(
+            msCertifiedValueOfRS_pr = new MultiString(
                     "Certified value of RS, %", "Атестоване значення СЗ, %", "Аттестованное значение СО, %"),
-            msAZRSOS = new MultiString(
+            msAZRSOS_pr = new MultiString(
                     "Certified value of WRS, %", "Атестоване значення РСЗ, %", "Аттестованное значение РСО, %"),
+            msCertifiedValueOfRS_mm = new MultiString(
+                    "Certified value of RS, mg/mL", "Атестоване значення СЗ, мг/мл", "Аттестованное значение СО, %"),
+            msAZRSOS_mm = new MultiString(
+                    "Certified value of WRS, mg/mL", "Атестоване значення РСЗ, мг/мл", "Аттестованное значение РСО, %"),
             msSKKPR = new MultiString(
                     "Statistical quality control of the results",
                     "Статистичний контроль якості результатів",
@@ -381,9 +395,9 @@ public class Strings {
                     "Одиниці атестованого значення",
                     "Единицы аттестованого значения"),
             msMgMl = new MultiString(
-                    "Mg / Ml",
-                    "Мг / Мл",
-                    "Мг / Мл"),
+                    "mg / mL",
+                    "мг / мл",
+                    "мг / мл"),
             msPercents = new MultiString(
                     "Percents",
                     "Проценти",

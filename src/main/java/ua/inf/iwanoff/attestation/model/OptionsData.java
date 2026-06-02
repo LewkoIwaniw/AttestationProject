@@ -14,6 +14,7 @@ public class OptionsData {
     public OptionsData() {
         variancesEquality = samplesHomogeneity = drift = true;
         sides = OneTwo.ONE;
+        units = Units.PERCENTS;
     }
 
     public OptionsData(boolean variancesEquality, boolean samplesHomogeneity, boolean drift, OneTwo sides, Units units) {
