@@ -516,7 +516,7 @@ public class Strings {
                     "Неправильное значение X"),
             msWrongValueOfConcentration = new MultiString(
                     "Wrong value of Concentration",
-                    "Хибне значення констрації",
+                    "Хибне значення концентрації",
                     "Неправильное значение концентрации"),
             msWrongValueOfUncertainty = new MultiString(
                     "Wrong value of Uncertainty",

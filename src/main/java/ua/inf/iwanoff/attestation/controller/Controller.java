@@ -163,8 +163,8 @@ public class Controller implements Initializable {
         labelOfficialStandardSample.setText(msOfficialReferenceSample.toString());
         labelWrsDocument.setText(msWrsDocument.toString());
         labelDate.setText(msTestDate.toString());
-        labelXPSS.setText(msCertifiedValueOfRS_mm.toString());
-        labelXPSS.setText(msCertifiedValueOfRS_pr.toString());
+        MultiString rs = options.getReportOptions().getUnits().equalsIgnoreCase("percents") ? msCertifiedValueOfRS_pr : msCertifiedValueOfRS_mm;
+        labelXPSS.setText(rs.toString());
         labelDeltaWRS.setText(msDeltaWRS.toString());
         labelNumber.setText(msProtocolNumber.toString());
         labelWeightsDilutions.setStyle("-fx-font-weight: bold;");
@@ -632,6 +632,8 @@ public class Controller implements Initializable {
     @FXML
     private void showOptions() {
         new OptionsWindow(lang).show(processor.getOptionsData());
+        MultiString rs = processor.getOptionsData().getUnits() == OptionsData.Units.PERCENTS ? msCertifiedValueOfRS_pr : msCertifiedValueOfRS_mm;
+        labelXPSS.setText(rs.toString());
     }
 
     @FXML

@@ -546,6 +546,7 @@ public class WrsData {
          *     
          */
         public void setName(String value) {
+            value = value.trim();
             this.name = value;
         }
 
