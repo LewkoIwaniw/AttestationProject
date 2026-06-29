@@ -23,9 +23,9 @@ public class OptionsWindow {
 
     public OptionsWindow(int language) {
         super();
-        checkBoxVariancesEquality = new CheckBox(msCalcVariancesEquality.get(language));
+        checkBoxVariancesEquality = new CheckBox(msTestHomogeneityOfVariances.get(language));
         checkBoxVariancesEquality.setPadding(new Insets(5, 10, 5, 10));
-        checkBoxSamplesHomogeneity = new CheckBox(msCalcSamplesHomogeneity.get(language));
+        checkBoxSamplesHomogeneity = new CheckBox(msOutlierTest.get(language));
         checkBoxSamplesHomogeneity.setPadding(new Insets(5, 10, 5, 10));
         checkBoxDrift = new CheckBox(msCalcDrift.get(language));
         checkBoxDrift.setPadding(new Insets(5, 10, 5, 10));

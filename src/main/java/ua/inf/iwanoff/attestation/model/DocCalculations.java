@@ -260,7 +260,7 @@ public class DocCalculations extends AbstractCalculations {
     @Override
     protected void showVariancesEquality() {
         report.newLine();
-        report.text(msPRD, Report.FONT_BOLD_12);
+        report.text(msTestHomogeneityOfVariances, Report.FONT_BOLD_12);
         report.newLine();
         report.createTable(new Object[][] {
                 { msRKB, msTZKB },
@@ -268,7 +268,8 @@ public class DocCalculations extends AbstractCalculations {
         });
         report.newLine();
         report.text(msConclusion, Report.FONT_BOLD_12);
-        report.text((uniformity ? msDRNVR : msDRZVN) + ".", Report.FONT_NORMAL_12);
+        report.text((uniformity ? msTheVariancesDoNotDifferSignificantly : msTheVariancesDifferSignificantly) + ".",
+                Report.FONT_NORMAL_12);
     }
 
     @Override
@@ -280,7 +281,7 @@ public class DocCalculations extends AbstractCalculations {
                     msCheckingTheHomogeneityCannotBeCalculated + ".", Report.FONT_NORMAL_12);
         }
         else {
-            report.text(msPOV, Report.FONT_BOLD_12);
+            report.text(msTestForOutliers, Report.FONT_BOLD_12);
             report.newLine();
             report.text(msOtklonenija, Report.FONT_BOLD_12);
             report.newLine();

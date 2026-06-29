@@ -151,8 +151,12 @@ public class Strings {
                     "Статистичний контроль якості результатів",
                     "Статистический контроль качества результатов"),
             msPRD = new MultiString(
-                    "Verification of variances equality ",
+                    "Verification of variances equality",
                     "Перевірка рівноточності дисперсій",
+                    "Проверка равноточности дисперсий"),
+            msHomogeneityOfVariancesTest = new MultiString(
+                    "Homogeneity of Variances Test",
+                    "Перевірка однорідності дисперсій ",
                     "Проверка равноточности дисперсий"),
             msKCRIT = new MultiString("Check criteria", "Контрольний критерій", "Контрольный критерий"),
             msRKB = new MultiString(
@@ -181,6 +185,10 @@ public class Strings {
                     "Variances differ non significantly",
                     "Дисперсії різняться незначуще, вибірки рівноточні",
                     "Дисперсии различаются незначимо, выборки равноточны"),
+            msTheVariancesDoNotDifferSignificantly = new MultiString(
+                    "The variances do not differ significantly; the samples are homogeneous",
+                    "Дисперсії різняться незначуще, вибірки однорідні",
+                    "Дисперсии различаются незначимо, выборки равноточны"),
             msPODNMBV = new MultiString(
                     "Verification of the variances equality by Bartlett cannot be preformed "
                             + "for solutions with equal analytical signals",
@@ -192,10 +200,14 @@ public class Strings {
                     "Variances differ significantly",
                     "Дисперсії різняться значуще, вибірки нерівноточні",
                     "Дисперсии различаются значимо, выборки неравноточны"),
+            msTheVariancesDifferSignificantly = new MultiString(
+                    "The variances differ significantly; the samples are not homogeneous",
+                    "Дисперсії різняться значуще, вибірки неоднорідні",
+                    "Дисперсии различаются значимо, выборки неравноточны"),
             msPOV = new MultiString(
                     "Verification of the homogeneity of samples",
-                    "Перевірка однорідності вибірок",
-                    "Проверка однородности выборок"),
+                    "Перевірка однорідності вибірок", ""),
+            msTestForOutliers = new MultiString("Test for Outliers","Перевірка однорідності вибірок",""),
             msOtklonenija = new MultiString(
                     "Deviation  from the mean (%)",
                     "Відхилення від середнього значення (%):",
@@ -220,11 +232,11 @@ public class Strings {
             msVO = new MultiString("no outliers", "однорідна", "однородна"),
             msVN = new MultiString("outlier is detected", "неоднорідна", "неоднородна"),
             msONPKZVO = new MultiString(
-                    "Deviations do not exceed a critical value, no outliers",
+                    "The deviations do not exceed the critical value; the sample is homogeneous",
                     "Відхилення не перевищують критичного значення, вибірки однорідні",
                     "Отклонения не превышают критического значения, выборки однородны"),
             msOPKZVN = new MultiString(
-                    "Deviations exceed a critical value, outlier is detected",
+                    "The deviations do exceed the critical value; the sample is not homogeneous",
                     "Відхилення перевищують критичне значення, вибірки неоднорідні",
                     "Отклонения превышают критическое значение, выборки неоднородны"),
             msPRNSZ = new MultiString(
@@ -375,14 +387,22 @@ public class Strings {
                     "Measurement runtime", "Час виконання вимірювання", "Время выполнения измерения"),
             msCalcVariancesEquality = new MultiString(
                     "Calculate of variances equality",
-                    "Розраховувати равноточніcть дисперсій",
+                    "Розраховувати рівноточніcть дисперсій",
                     "Рассчитывать равноточность дисперсий"),
+            msTestHomogeneityOfVariances = new MultiString(
+                   "Test Homogeneity of Variances",
+                   "Розрахувати однорідність дисперсій",
+                   "Рассчитывать равноточность дисперсий"),
             msHomogeneity = new MultiString(
                     "Homogeneity",
                     "Однорідність",
                     "Однородность"),
             msCalcSamplesHomogeneity = new MultiString(
                     "Calculate the homogeneity of samples",
+                    "Розраховувати однорідність вибірок",
+                    "Рассчитывать однородность выборок"),
+            msOutlierTest = new MultiString(
+                    "Outlier Test",
                     "Розраховувати однорідність вибірок",
                     "Рассчитывать однородность выборок"),
             msCalcDrift = new MultiString("Calculate drift", "Розраховувати дрейф", "Рассчитывать дрейф"),
