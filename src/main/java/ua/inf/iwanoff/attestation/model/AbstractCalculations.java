@@ -163,21 +163,21 @@ public abstract class AbstractCalculations {
         recalcSourceData();
         try {
             showResultsTable();
-            calcWSSSamplesHomogeneity();
             if ((flag & FLAG_HOMOGENEITY) > 0) {
+                calcWSSSamplesHomogeneity();
                 showWSSSamplesHomogeneity();
             }
             showStatisticalQualityTestHeader();
-            calcVariancesEquality();
             if (optionsData.isVariancesEquality()) {
+                calcVariancesEquality();
                 showVariancesEquality();
             }
-            calcSamplesHomogeneity();
             if (optionsData.isSamplesHomogeneity()) {
+                calcSamplesHomogeneity();
                 showSamplesHomogeneity();
             }
-            statisticalQualityTest();
             if ((flag & FLAG_ASCERTAINMENT) > 0) {
+                statisticalQualityTest();
                 showStatisticalQualityTestTable();
             }
             if (optionsData.isDrift()) {
@@ -486,7 +486,12 @@ public abstract class AbstractCalculations {
             }
             xAverNormalized[i] = Result.create(6).setValue(normalized);
         }
-        pssAverNormalized = Result.create(6).setValue(rsSum / pssCount);
+        if (pssCount > 0) {
+            pssAverNormalized = Result.create(6).setValue(rsSum / pssCount);
+        }
+        else {
+            pssAverNormalized = Result.create(6).setValue(0.0);
+        }
         wrsAverNormalized = Result.create(6).setValue(wrsSum / wrsCount);
         double xpss = 0;
         try {

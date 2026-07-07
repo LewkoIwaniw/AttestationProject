@@ -317,6 +317,6 @@ public class AttestationProcessor {
 //            "ПАТ НВЦ \"Борщагівський хіміко-фармацевтичний завод\"",
 //            "ПАО НПЦ \"Борщаговский химико-фармацевтический завод\""),
 //    "borscanovsky_chphz.png");
-    public static final String VERSION = "2.2.03";
+    public static final String VERSION = "2.2.04";
 
 }
