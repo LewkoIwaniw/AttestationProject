@@ -260,14 +260,14 @@ public class Strings {
                     "Practical insignificance of differences:",
                     "Практична незначимість відмінностей:",
                     "Практическая незначимость различий:"),
-            msNeznzczimo = new MultiString("are not significantly differ", "незначуще", "незначимо"),
-            msZnaczimo = new MultiString("are significantly differ", "значуще", "значимо"),
+            msNeznzczimo = new MultiString("not significantly", "незначуще", "незначимо"),
+            msZnaczimo = new MultiString("significantly", "значуще", "значимо"),
             msNSZSOO = new MultiString(
-                    "Normalized means of RS values differ",
+                    "Normalized mean values for RSs differ",
                     "Нормалізовані середні значення СЗ відрізняються",
                     "Нормализованные средние значения СО отличаются"),
             msNSZRSOO = new MultiString(
-                    "Normalized means of WRS values differ",
+                    "Normalized mean values for WRSs differ",
                     "Нормалізовані середні значення РСЗ відрізняються",
                     "Нормализованные средние значения РСО отличаются"),
             msPOD = new MultiString(

@@ -375,6 +375,9 @@ public class Report {
                         case "com.lowagie.text.Cell" -> (Cell) tableData[i][j];
                         default -> new Cell(new Phrase(tableData[i][j] + "", font));
                     };
+                    if (tableData[i][j].toString().equals("1.0")) {
+                        cell = new Cell(new Phrase("1.00", font));
+                    }
                 } else {
                     cell = new Cell("");
                 }

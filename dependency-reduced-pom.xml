@@ -4,7 +4,7 @@
   <groupId>ua.inf.iwanoff</groupId>
   <artifactId>attestation</artifactId>
   <name>attestation</name>
-  <version>2.2.03</version>
+  <version>2.2.04</version>
   <build>
     <plugins>
       <plugin>
@@ -67,9 +67,9 @@
         </executions>
         <configuration>
           <destination>${project.build.directory}/jpackage</destination>
-          <name>WRS Attestation</name>
+          <name>WRS Attestation Ternopharm</name>
           <type>EXE</type>
-          <appVersion>2.2.03</appVersion>
+          <appVersion>2.2.04</appVersion>
           <winDirChooser>true</winDirChooser>
           <winMenu>true</winMenu>
           <winMenuGroup>WRS Attestation</winMenuGroup>

@@ -254,7 +254,9 @@ public class DocCalculations extends AbstractCalculations {
     @Override
     protected void showStatisticalQualityTestHeader() {
         report.newLine();
-        report.text(msSKKPR, Report.FONT_BOLD_12);
+        if ((flag & FLAG_ASCERTAINMENT) != 0 || !empty()) {
+            report.text(msSKKPR, Report.FONT_BOLD_12);
+        }
     }
 
     @Override
@@ -524,6 +526,10 @@ public class DocCalculations extends AbstractCalculations {
         }
     }
 
+    private boolean empty() {
+        return !(optionsData.isSamplesHomogeneity() || optionsData.isVariancesEquality() || optionsData.isDrift());
+    }
+
     @Override
     protected void showConclusions() {
         report.newLine();
@@ -546,11 +552,13 @@ public class DocCalculations extends AbstractCalculations {
             report.text(delta_unit.getRounded() <= reqDeltaUnit.getRounded() ? msTodiesuvOp + "." : "" +
                     msTodiesunvOnp + ".", Report.FONT_NORMAL_12);
         }
-        if (commonAnalyses == commonOK) {
-            report.text(msRequirementsForTheResultsQualityCriteriaAreSatisfied + ".", Report.FONT_NORMAL_12);
-        }
-        else {
-            report.text(msRequirementsForTheResultsQualityCriteriaAreNotSatisfied + ".", Report.FONT_NORMAL_12);
+        if ((flag & FLAG_ASCERTAINMENT) != 0 || !empty()) {
+            if (commonAnalyses == commonOK) {
+                report.text(msRequirementsForTheResultsQualityCriteriaAreSatisfied + ".", Report.FONT_NORMAL_12);
+            }
+            else {
+                report.text(msRequirementsForTheResultsQualityCriteriaAreNotSatisfied + ".", Report.FONT_NORMAL_12);
+            }
         }
         report.newLine();
         report.createTable(new Object[][] {
@@ -638,9 +646,11 @@ public class DocCalculations extends AbstractCalculations {
                 });
             }
             report.newLine();
-            report.text(msConclusion, Report.FONT_BOLD_12);
-            report.text(delta_unit.getRounded() <= reqDeltaUnit.getRounded() ? msTodiesuvOp + "." : "" +
-                    msTodiesunvOnp + ".", Report.FONT_NORMAL_12);
+            if ((flag & FLAG_ASCERTAINMENT) != 0 || !empty()) {
+                report.text(msConclusion, Report.FONT_BOLD_12);
+                report.text(delta_unit.getRounded() <= reqDeltaUnit.getRounded() ? msTodiesuvOp + "." : "" +
+                                                                                                        msTodiesunvOnp + ".", Report.FONT_NORMAL_12);
+            }
         }
     }
 

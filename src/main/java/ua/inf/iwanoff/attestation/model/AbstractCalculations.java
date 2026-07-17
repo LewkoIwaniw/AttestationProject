@@ -15,9 +15,9 @@ import static ua.inf.iwanoff.utils.StringUtils.*;
  */
 public abstract class AbstractCalculations {
     protected int flag;
-    private double[] rsd;
-    private double[] aWRS;
-    private double[] aPSS;
+    private double[] rsd = {};
+    private double[] aWRS = {};
+    private double[] aPSS = {};
     private double xpss;
     protected Result reqDeltaWRS;
     protected double delta_pPSS;
@@ -350,6 +350,9 @@ public abstract class AbstractCalculations {
         return Times.WRONG;
     }
 
+    private void prepareArrays() {
+
+    }
     private void calcSamplesHomogeneity() {
         f = new int[data.size()];
         for (int i = 0; i < data.size(); i++) {
@@ -357,10 +360,7 @@ public abstract class AbstractCalculations {
         }
         commonDegreeOfFreedom = MathUtils.fp(f);
         twoSidedStudent99 = Result.create(9, 4).setValue(MathUtils.Student.calcStudent(2, commonDegreeOfFreedom, 99));
-        rsd = new double[data.size()];
-        for (int i = 0; i < data.size(); i++) {
-            rsd[i] = MathUtils.relativeStandardDeviation(data.getXSorted(i));
-        }
+
         d_msOOSO = Result.create(2).setValue(MathUtils.UnitedRelativeStandardDeviationU(rsd, f));
         d_msMDO = Result.create(6).setValue(d_msOOSO.getValue() * twoSidedStudent99.getValue());
         oneSidedStudent95 = Result.create(9, 4).setValue(MathUtils.Student.calcStudent(1, commonDegreeOfFreedom, 95));
@@ -443,7 +443,10 @@ public abstract class AbstractCalculations {
     }
 
     private void calcVariancesEquality() {
-        commonAnalyses++;
+        if (optionsData.isVariancesEquality()) {
+           commonAnalyses++;
+        }
+
         try {
             Bartlett.Mm mm = calcBartlett(data.size());
             if (mm != null) {
@@ -501,6 +504,10 @@ public abstract class AbstractCalculations {
         }
         catch (Exception e) {
             e.printStackTrace();
+        }
+        rsd = new double[data.size()];
+        for (int i = 0; i < data.size(); i++) {
+            rsd[i] = MathUtils.relativeStandardDeviation(data.getXSorted(i));
         }
     }
 
