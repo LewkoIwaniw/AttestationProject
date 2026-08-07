@@ -599,21 +599,15 @@ public class DocCalculations extends AbstractCalculations {
 
     @Override
     protected String getErrorMessage(DataCheck check) {
-        switch (check) {
-            case NO_WRS:
-                return msNoWRSData.toString();
-            case NO_PSS:
-                return msNoRSData.toString();
-            case WRONG_PSS_COUNT:
-                return msTheNumberOfRSSamplesIsGreaterThanTwo.toString();
-            case WRONG_WRS_COUNT:
-                return msTheNumberOfWRSSamplesIsGreaterThanTwo.toString();
-            case WRONG_X_COUNT:
-                return msDifferentNumberOfParallelMeasurementsUsedForDifferentSamples.toString();
-            case WRONG_PSS_WRS_COUNT:
-                return msNumberOfWrsAndRsTestsDoesNotMatchTheChosenSchema.toString();
-        }
-        return null;
+        return switch (check) {
+            case NO_WRS -> msNoWRSData.toString();
+            case NO_PSS -> msNoRSData.toString();
+            case WRONG_PSS_COUNT -> msTheNumberOfRSSamplesIsGreaterThanTwo.toString();
+            case WRONG_WRS_COUNT -> msTheNumberOfWRSSamplesIsGreaterThanTwo.toString();
+            case WRONG_X_COUNT -> msDifferentNumberOfParallelMeasurementsUsedForDifferentSamples.toString();
+            case WRONG_PSS_WRS_COUNT -> msNumberOfWrsAndRsTestsDoesNotMatchTheChosenSchema.toString();
+            default -> null;
+        };
     }
 
     @Override
@@ -676,10 +670,9 @@ public class DocCalculations extends AbstractCalculations {
     }
 
     private Object getDeltaSqrt() {
-        switch (docType) {
-            case PDF: return report.phrase(Report.image(deltaSqrt));
-            case HTML: return "∆∙√2";
-        }
-        return null;
+        return switch (docType) {
+            case PDF -> report.phrase(Report.image(deltaSqrt));
+            case HTML -> "∆∙√2";
+        };
     }
 }

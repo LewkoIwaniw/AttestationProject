@@ -6,63 +6,126 @@ import static java.lang.Math.sqrt;
 import static ua.inf.iwanoff.utils.StringUtils.timeToInt;
 import static ua.inf.iwanoff.utils.StringUtils.value;
 
+/**
+ * Utility class providing mathematical and statistical calculation functions.
+ */
 public class MathUtils {
 
+    /**
+     * Exception thrown when data is invalid or calculations result in unacceptable values.
+     */
     public static class BadData extends Exception { }
 
+    /**
+     * Exception thrown when required data is missing.
+     */
     public static class NoData extends Exception { }
 
+    /**
+     * Exception thrown when a time format is incorrect.
+     */
     public static class WrongTimeFormatException extends Exception { }
 
+    /** Small epsilon value used for floating-point comparisons. */
     public static final double epsilon = 0.00001;
 
+    /**
+     * Calculates the standard deviation of an array.
+     * 
+     * @param arr the input array of values
+     * @param freedom degrees of freedom
+     * @return the standard deviation
+     */
     public static double stdDev(double[] arr, int freedom) {
         double mAver = Arrays.stream(arr).average().getAsDouble();
         int len = arr.length;
         return sqrt(Arrays.stream(arr).map(v -> (v - mAver) * (v - mAver)).sum() / (len - freedom));
     }
 
+    /**
+     * Calculates the relative standard deviation of an array.
+     * 
+     * @param arr the input array of values
+     * @return the relative standard deviation percentage
+     */
     public static double relStdDev(double[] arr) {
         double aver = average(arr);
         return aver == 0 ? 0 : stdDev(arr, 1) / aver * 100;
     }
 
+    /**
+     * Calculates the average normalized value by a constant.
+     * 
+     * @param arr the input array of values
+     * @param c the normalization constant
+     * @return the normalized average
+     */
     public static double averNormalized(double[] arr, double c) {
         return average(arr) / c;
     }
 
-    public static double Round(double d, int digitsCount)
-    {
-        if (digitsCount > 0 && digitsCount < 15)
-        {
+    /**
+     * Rounds a double value to a specified number of digits.
+     * 
+     * @param d the value to round
+     * @param digitsCount the number of decimal digits
+     * @return the rounded value
+     */
+    public static double Round(double d, int digitsCount) {
+        if (digitsCount > 0 && digitsCount < 15) {
             double dC10 = 1;
-            for (int i = 0; i < digitsCount; i++)
+            for (int i = 0; i < digitsCount; i++) {
                 dC10 *= 10;
+            }
             long n = (long)(d * dC10 + (d > 0 ? 0.5 : -0.5));
             d = n / dC10;
         }
         return d;
     }
 
+    /**
+     * Calculates the sum of array elements.
+     * 
+     * @param arr the input array of values
+     * @return the sum
+     */
     public static double sum(double... arr) {
         return Arrays.stream(arr).sum();
     }
 
+    /**
+     * Calculates the sum of squares of array elements.
+     * 
+     * @param arr the input array of values
+     * @return the sum of squares
+     */
     public static double sumOfSquares(double... arr) {
         return Arrays.stream(arr).reduce(0, (x, y) -> x + y * y);
     }
 
+    /**
+     * Calculates the square of the sum of array elements.
+     * 
+     * @param arr the input array of values
+     * @return the squared sum
+     */
     public static double squaredSum(double... arr) {
         return sqr(Arrays.stream(arr).sum());
     }
 
+    /**
+     * Calculates percentage deviations from the average for each element.
+     * 
+     * @param x the input array of values
+     * @return the array of percentage deviations
+     */
     public static double[] deviations(double[] x) {
         double[] d = new double[x.length];
         double av = average(x);
-        for (int i = 0; i < x.length; i++)
-        {
-            if (av != 0)
+        for (int i = 0; i < x.length; i++) {
+            if (av != 0) {
                 d[i] = ((x[i] - av) / av) * 100;
+            }
         }
         return d;
     }
@@ -74,130 +137,206 @@ public class MathUtils {
      * @return n-th power of getX
      */
     public static double power(double x, int n) {
-        if (x == 0 && n == 0)
+        if (x == 0 && n == 0) {
             return 1;
-        if (x == 0)
+        }
+        if (x == 0) {
             return 0;
+        }
         return n < 0 ? 1 / power(x, -n) : (n == 0 ? 1 : x * power(x, n - 1));
     }
 
+    /**
+     * Calculates the average of an array.
+     * 
+     * @param a the input array of values
+     * @return the average value
+     */
     public static double average(double[] a) {
         return Arrays.stream(a).average().getAsDouble();
     }
 
+    /** Configuration parameter for Bartlett's test. */
     public static int forBartlett = 0;
 
-    public static double StandardDeviation(double[] a)
-    {
+    /**
+     * Calculates standard deviation with Bartlett adjustments.
+     * 
+     * @param a the input array of values
+     * @return the standard deviation
+     */
+    public static double StandardDeviation(double[] a) {
         double sum = 0;
-        for (double x : a)
-        sum += x * x;
+        for (double x : a) {
+            sum += x * x;
+        }
         double result = sum - a.length * power(average(a), 2);
         if (result == 0 && forBartlett != 0)
         {
             result = Math.pow(10, -forBartlett) * 0.41;
             return result;
         }
-        if (a.length > 1 && result > 0)
+        if (a.length > 1 && result > 0) {
             return Math.sqrt(result / (a.length - 1));
-        else
+        }
+        else {
             return 0; // ????
+        }
     }
 
-    public static double relativeStandardDeviation(double[] a)
-    {
-        if (average(a) != 0)
-        {
+    /**
+     * Calculates the relative standard deviation percentage.
+     * 
+     * @param a the input array of values
+     * @return the relative standard deviation
+     */
+    public static double relativeStandardDeviation(double[] a) {
+        if (average(a) != 0) {
             return (StandardDeviation(a) / average(a)) * 100;
         }
-        else
+        else {
             return 0; // ????
+        }
     }
 
-    public static double ForcedDeviation(double[] a)
-    {
+    /**
+     * Returns a forced deviation constant.
+     * 
+     * @param a the input array of values
+     * @return the forced deviation value
+     */
+    public static double ForcedDeviation(double[] a) {
         return 0.41;
     }
 
-    public static double AverageNormalizedValue(double[] a, double c)
-    {
-        if (c != 0)
-        {
+    /**
+     * Calculates the average normalized value by a factor c.
+     * 
+     * @param a the input array of values
+     * @param c the normalization factor
+     * @return the average normalized value
+     */
+    public static double AverageNormalizedValue(double[] a, double c) {
+        if (c != 0) {
             double sum = 0;
-            for (int i = 0; i < a.length; i++)
-                sum += a[i] / c;
+            for (double v : a) {
+                sum += v / c;
+            }
             return sum / a.length;
         }
-        else
+        else {
             return 0;
+        }
     }
 
-    public static double DifferenceNormalizedValue(double[] a)
-    {
+    /**
+     * Calculates the normalized difference value for the first two elements.
+     * 
+     * @param a the input array of values
+     * @return the difference normalized percentage
+     */
+    public static double DifferenceNormalizedValue(double[] a) {
         return Math.abs(a[0] - a[1]) / (a[0] + a[1]) * 2 * 100;
     }
 
-    public static int fp(int[] f)
-    {
+    /**
+     * Calculates degrees of freedom sum.
+     * 
+     * @param f array of integer degrees of freedom
+     * @return the calculated sum
+     */
+    public static int fp(int[] f) {
         int sum = 0;
-        for (int i = 0; i < f.length; i++)
-            sum += f[i] - 1;
-
+        for (int j : f) {
+            sum += j - 1;
+        }
         return sum;
     }
 
-    public static int Fp2(int[] f)
-    {
+    /**
+     * Calculates alternative degrees of freedom sum.
+     * 
+     * @param f array of integer degrees of freedom
+     * @return the calculated sum
+     */
+    public static int Fp2(int[] f) {
         int sum = 0;
-        for (int i = 0; i < f.length; i++)
-            sum += f[i] - 2;
-
+        for (int j : f) {
+            sum += j - 2;
+        }
         return sum;
     }
 
-    public static double UnitedRelativeStandardDeviation(double[] r)
-    {
+    /**
+     * Calculates united relative standard deviation.
+     * 
+     * @param r input array of relative standard deviations
+     * @return the united relative standard deviation
+     */
+    public static double UnitedRelativeStandardDeviation(double[] r) {
         double sum = 0;
-        for (int i = 0; i < r.length; i++)
-            sum += r[i] * r[i];
-
+        for (double v : r) {
+            sum += v * v;
+        }
         return Math.sqrt(sum / r.length);
     }
 
+    /**
+     * Calculates united relative standard deviation with degrees of freedom.
+     * 
+     * @param r input array of relative standard deviations
+     * @param f array of degrees of freedom
+     * @return the united relative standard deviation
+     */
     public static double UnitedRelativeStandardDeviationU(double[] r, int[] f) {
         double sum = 0;
-        for (int i = 0; i < r.length; i++)
+        for (int i = 0; i < r.length; i++) {
             sum += (f[i] - 1) * r[i] * r[i];
-
+        }
         return Math.sqrt(sum / fp(f));
     }
 
-    public static double RSD_unit(double[] x, double count)
-    {
+    /**
+     * Calculates unit relative standard deviation.
+     * 
+     * @param x input array of values
+     * @param count count factor
+     * @return the unit relative standard deviation
+     */
+    public static double RSD_unit(double[] x, double count) {
         return Math.sqrt(sumOfSquares(x) / count);
     }
 
-    //------------------------------------------
-
-    public static double sum_x_time(double[] x, double[] t)  // расчет для таблицы результатов дрейфа суммы х*time
-    {
+    /**
+     * Calculates the sum of products of x and time (used for drift results table: sum x * time).
+     * 
+     * @param x input array of values
+     * @param t input array of time values
+     * @return the calculated sum
+     */
+    public static double sum_x_time(double[] x, double[] t) {
         double sum = 0;
-        for (int i = 0; i < x.length; i++)
-        {
+        for (int i = 0; i < x.length; i++) {
             sum += x[i] * t[i];
         }
         return sum;
     }
 
-    public static double b(double[] x, double[] t) // расчет для таблицы результатов дрейфа b (гориз. ось - время)
-    {
+    /**
+     * Calculates parameter b for drift results table (horizontal axis - time).
+     * 
+     * @param x input array of values
+     * @param t input array of time values
+     * @return parameter b
+     */
+    public static double b(double[] x, double[] t) {
         double result = 0;
-        try
-        {
+        try {
             double s = x.length * sum_x_time(x, t) - sum(x) * sum(t);
             double z = (x.length * sumOfSquares(t) - sum(t) * sum(t));
-            if (Math.abs(z) < epsilon)
+            if (Math.abs(z) < epsilon) {
                 throw new BadData();
+            }
             result = s / z;
         }
         catch (BadData ex) {
@@ -206,11 +345,16 @@ public class MathUtils {
         return result;
     }
 
-    public static double a(double[] x, double[] t) // расчет для таблицы результатов дрейфа a (гориз. ось - время)
-    {
+    /**
+     * Calculates parameter a for drift results table (horizontal axis - time).
+     * 
+     * @param x input array of values
+     * @param t input array of time values
+     * @return parameter a
+     */
+    public static double a(double[] x, double[] t) {
         double result = 0;
-        try
-        {
+        try {
             double sx = sum(x);
             double b_ = b(x, t);
             double st = sum(t);
@@ -222,21 +366,25 @@ public class MathUtils {
         return result;
     }
 
-
-    public static double S0(double[] x, double[] t) // расчет для таблицы результатов дрейфа S0 (гориз. ось - время)
-    {
+    /**
+     * Calculates parameter S0 for drift results table (horizontal axis - time).
+     * 
+     * @param x input array of values
+     * @param t input array of time values
+     * @return parameter S0
+     */
+    public static double S0(double[] x, double[] t) {
         double result = 0;
-        try
-        {
-
+        try {
             double sx2 = sumOfSquares(x);
             double sx = sum(x);
             double a_ = a(x, t);
             double b_ = b(x, t);
             double sxt = sum_x_time(x, t);
             double sq = sx2 - a_ * sx - b_ * sxt;
-            if (((sq) / (x.length - 2)) < 0)
+            if (((sq) / (x.length - 2)) < 0) {
                 throw new BadData();
+            }
             result = Math.sqrt(sq / (x.length - 2));
         }
         catch (Exception bd) {
@@ -245,11 +393,16 @@ public class MathUtils {
         return result;
     }
 
-    public static double Sb(double[] x, double[] t) // расчет для таблицы результатов дрейфа Sb (гориз. ось - время)
-    {
+    /**
+     * Calculates parameter Sb for drift results table (horizontal axis - time).
+     * 
+     * @param x input array of values
+     * @param t input array of time values
+     * @return parameter Sb
+     */
+    public static double Sb(double[] x, double[] t) {
         double result = 0;
-        try
-        {
+        try {
             double st2 = sumOfSquares(t);
             double st = sum(t);
             double n = x.length;
@@ -266,20 +419,29 @@ public class MathUtils {
         return result;
     }
 
-    public static double Sa(double[] x, double[] t) throws NoData // расчет для таблицы результатов дрейфа Sa (гориз. ось - время)
-    {
-        if (x.length <= 2)
+    /**
+     * Calculates parameter Sa for drift results table (horizontal axis - time).
+     * 
+     * @param x input array of values
+     * @param t input array of time values
+     * @return parameter Sa
+     * @throws NoData if data length is insufficient
+     */
+    public static double Sa(double[] x, double[] t) throws NoData {
+        if (x.length <= 2) {
             throw new NoData();
+        }
         double result = 0;
-        try
-        {
+        try {
             double st2 = sumOfSquares(t);
             double n = x.length;
             double sb = Sb(x, t);
-            if (n == 0)
+            if (n == 0) {
                 throw new BadData();
-            if (((sb * sb * st2) / n) < 0)
+            }
+            if (((sb * sb * st2) / n) < 0) {
                 throw new BadData();
+            }
             result = Math.sqrt((sb * sb * st2) / n);
         }
         catch (Exception bd) {
@@ -288,15 +450,21 @@ public class MathUtils {
         return result;
     }
 
-    public static double t(double[] x, double[] t) // расчет для таблицы результатов дрейфа t (Student)
-    {
+    /**
+     * Calculates Student's t parameter for drift results table.
+     * 
+     * @param x input array of values
+     * @param t input array of time values
+     * @return the Student's t value
+     */
+    public static double t(double[] x, double[] t) {
         double result = 0;
-        try
-        {
+        try {
             double b_ = b(x, t);
             double sb_ = Sb(x, t);
-            if (Math.abs(sb_) < epsilon)
+            if (Math.abs(sb_) < epsilon) {
                 throw new BadData();
+            }
             result = b_ / sb_;
         }
         catch (Exception bd) {
@@ -305,20 +473,31 @@ public class MathUtils {
         return result;
     }
 
-    public static double x_m(double[] x) // расчет для таблицы результатов дрейфа getX cp.
-    {
+    /**
+     * Calculates mean x for drift results table (average x).
+     * 
+     * @param x input array of values
+     * @return the average value
+     */
+    public static double x_m(double[] x) {
         return sum(x) / x.length;
     }
 
-    public static double difference(double[] x, double[] t) // расчет для таблицы результатов дрейфа getX кон. (х max)
-    {
+    /**
+     * Calculates difference for drift results table (end x corresponding to x max).
+     * 
+     * @param x input array of values
+     * @param t input array of time values
+     * @return the difference percentage
+     */
+    public static double difference(double[] x, double[] t) {
         double result = 0;
-        try
-        {
+        try {
             double xb = x_b(x, t);
             double xe = x_e(x, t);
-            if (Math.abs((xb + xe)) < epsilon)
+            if (Math.abs((xb + xe)) < epsilon) {
                 throw new BadData();
+            }
             result = 2.0 * 100.0 * (xe - xb) / (xb + xe);
         }
         catch (Exception bd) {
@@ -327,15 +506,28 @@ public class MathUtils {
         return result;
     }
 
-    public static double x_b(double[] x, double[] t) // расчет для таблицы результатов дрейфа getX нач.(соотв. tmin)
-    {
-        double min = t[0]; //  time из  таблицы исходных данных
+    /**
+     * Calculates initial x for drift results table (corresponding to tmin from raw data table).
+     * 
+     * @param x input array of values
+     * @param t input array of time values
+     * @return initial x value
+     */
+    public static double x_b(double[] x, double[] t) {
+        double min = t[0];
         double b_ = b(x, t);
         double a_ = a(x, t);
         return b_ * min + a_;
     }
 
-    public static double x_e(double[] x, double[] t) // расчет для таблицы результатов дрейфа getX кон. (соотв. tmax)
+    /**
+     * Calculates end x for drift results table (corresponding to tmax).
+     * 
+     * @param x input array of values
+     * @param t input array of time values
+     * @return end x value
+     */
+    public static double x_e(double[] x, double[] t)
     {
         double max = t[t.length - 1];
         double b_ = b(x, t);
@@ -343,162 +535,168 @@ public class MathUtils {
         return b_ * max + a_;
     }
 
-    public static double Qtab(int P, int n)
-    {
-      double[][] table = {{0.89, 0.94, 0.99},
+    /**
+     * Retrieves a tabular Q value based on probability and sample size.
+     * 
+     * @param P probability percentage
+     * @param n sample size
+     * @return tabular Q value
+     */
+    public static double Qtab(int P, int n) {
+        double[][] table = {{0.89, 0.94, 0.99},
             {0.68, 0.77, 0.89},
             {0.56, 0.64, 0.76},
             {0.48, 0.56, 0.70},
             {0.43, 0.51, 0.64},
             {0.40, 0.48, 0.58},
             {0.38, 0.46, 0.55}};
-        switch (P){
-            case 90: return table[n - 3][0];
-            case 95: return table[n - 3][1];
-            case 99: return table[n - 3][2];
-            default: return 0;
-        }
+        return switch (P) {
+            case 90 -> table[n - 3][0];
+            case 95 -> table[n - 3][1];
+            case 99 -> table[n - 3][2];
+            default -> 0;
+        };
     }
 
-    public static boolean differ(List<String> dates)
-    {
+    /**
+     * Checks if all date strings represent unique parsed time values.
+     * 
+     * @param dates list of date strings
+     * @return true if all dates are unique and valid, false otherwise
+     */
+    public static boolean differ(List<String> dates) {
         SortedSet<Integer> sortedSet = new TreeSet<>();
         for (String s: dates) {
             Integer k = timeToInt(s);
             if (k == null || !sortedSet.add(k)) {
-                    return false;
+                return false;
             }
         }
         return true;
     }
 
-//--------------------------------------------------
-
+    /**
+     * Checks if all elements in an array are distinct.
+     * 
+     * @param arr the input array
+     * @param <E> the element type
+     * @return true if all elements are distinct, false otherwise
+     */
     public static <E>boolean allDiffer(E[] arr) {
         return Arrays.stream(arr).distinct().count() == arr.length;
     }
-//--------------------------------------------------
 
+    /**
+     * Inner class containing Student's distribution calculations and tables.
+     */
     public static class Student {
-        static public double[][] St = new double[][]
-                {
+        /** Student's distribution lookup table. */
+        static public double[][] St = new double[][] {
                         //side = 1     95.00    97.50   99.00   99.50     99.90    99.95
                         //side = 2     90.00    95.00   98.00   99.00     99.80    99.90
-          /* 01 */{1, 6.3138, 12.7062, 31.8205, 63.6567, 318.310, 636.619},
-          /* 02 */{2, 2.9200, 4.3027, 6.9646, 9.9248, 22.3271, 31.5991},
-          /* 03 */{3, 2.3534, 3.1824, 4.5407, 5.8409, 10.2145, 12.9240},
-          /* 04 */{4, 2.1318, 2.7764, 3.7469, 4.6041, 7.1732, 8.6103},
-          /* 05 */{5, 2.0150, 2.5706, 3.3649, 4.0321, 5.8934, 6.8688},
+            /* 01 */{1, 6.3138, 12.7062, 31.8205, 63.6567, 318.310, 636.619},
+            /* 02 */{2, 2.9200, 4.3027, 6.9646, 9.9248, 22.3271, 31.5991},
+            /* 03 */{3, 2.3534, 3.1824, 4.5407, 5.8409, 10.2145, 12.9240},
+            /* 04 */{4, 2.1318, 2.7764, 3.7469, 4.6041, 7.1732, 8.6103},
+            /* 05 */{5, 2.0150, 2.5706, 3.3649, 4.0321, 5.8934, 6.8688},
 
-          /* 06 */{6, 1.9432, 2.4469, 3.1427, 3.7074, 5.2076, 5.9588},
-          /* 07 */{7, 1.8946, 2.3646, 2.9980, 3.4995, 4.7853, 5.4079},
-          /* 08 */{8, 1.8595, 2.3060, 2.8965, 3.3554, 4.5008, 5.0413},
-          /* 09 */{9, 1.8331, 2.2622, 2.8214, 3.2498, 4.2968, 4.7809},
-          /* 10 */{10, 1.8125, 2.2281, 2.7638, 3.1693, 4.1437, 5.5869},
+            /* 06 */{6, 1.9432, 2.4469, 3.1427, 3.7074, 5.2076, 5.9588},
+            /* 07 */{7, 1.8946, 2.3646, 2.9980, 3.4995, 4.7853, 5.4079},
+            /* 08 */{8, 1.8595, 2.3060, 2.8965, 3.3554, 4.5008, 5.0413},
+            /* 09 */{9, 1.8331, 2.2622, 2.8214, 3.2498, 4.2968, 4.7809},
+            /* 10 */{10, 1.8125, 2.2281, 2.7638, 3.1693, 4.1437, 5.5869},
 
-          /* 11 */{11, 1.7956, 2.2010, 2.7181, 3.1058, 4.0247, 4.4370},
-          /* 12 */{12, 1.7823, 2.1788, 2.6810, 3.0545, 3.9296, 4.3178},
-          /* 13 */{13, 1.7709, 2.1604, 2.6503, 3.0123, 3.8520, 4.2208},
-          /* 14 */{14, 1.7613, 2.1448, 2.6245, 2.9768, 3.7874, 4.1405},
-          /* 15 */{15, 1.7530, 2.1314, 2.6025, 2.9467, 3.7328, 4.0728},
+            /* 11 */{11, 1.7956, 2.2010, 2.7181, 3.1058, 4.0247, 4.4370},
+            /* 12 */{12, 1.7823, 2.1788, 2.6810, 3.0545, 3.9296, 4.3178},
+            /* 13 */{13, 1.7709, 2.1604, 2.6503, 3.0123, 3.8520, 4.2208},
+            /* 14 */{14, 1.7613, 2.1448, 2.6245, 2.9768, 3.7874, 4.1405},
+            /* 15 */{15, 1.7530, 2.1314, 2.6025, 2.9467, 3.7328, 4.0728},
 
-          /* 16 */{16, 1.7459, 2.1199, 2.5835, 2.9208, 3.6862, 4.0150},
-          /* 17 */{17, 1.7396, 2.1098, 2.5669, 2.8982, 3.6458, 3.9651},
-          /* 18 */{18, 1.7341, 2.1009, 2.5524, 2.8784, 3.6105, 3.9216},
-          /* 19 */{19, 1.7291, 2.0930, 2.5395, 2.8609, 3.5794, 3.8834},
-          /* 20 */{20, 1.7247, 2.0860, 2.5280, 2.8453, 3.5518, 3.8495},
+            /* 16 */{16, 1.7459, 2.1199, 2.5835, 2.9208, 3.6862, 4.0150},
+            /* 17 */{17, 1.7396, 2.1098, 2.5669, 2.8982, 3.6458, 3.9651},
+            /* 18 */{18, 1.7341, 2.1009, 2.5524, 2.8784, 3.6105, 3.9216},
+            /* 19 */{19, 1.7291, 2.0930, 2.5395, 2.8609, 3.5794, 3.8834},
+            /* 20 */{20, 1.7247, 2.0860, 2.5280, 2.8453, 3.5518, 3.8495},
 
-          /* 21 */{21, 1.7207, 2.0796, 2.5176, 2.8314, 3.5272, 3.8193},
-          /* 22 */{22, 1.7171, 2.0739, 2.5083, 2.8188, 3.5050, 3.7921},
-          /* 23 */{23, 1.7139, 2.0687, 2.4999, 2.8073, 3.4850, 3.7676},
-          /* 24 */{24, 1.7109, 2.0639, 2.4922, 2.7969, 3.4668, 3.7454},
-          /* 25 */{25, 1.7081, 2.0595, 2.4851, 2.7874, 3.4502, 3.7251},
+            /* 21 */{21, 1.7207, 2.0796, 2.5176, 2.8314, 3.5272, 3.8193},
+            /* 22 */{22, 1.7171, 2.0739, 2.5083, 2.8188, 3.5050, 3.7921},
+            /* 23 */{23, 1.7139, 2.0687, 2.4999, 2.8073, 3.4850, 3.7676},
+            /* 24 */{24, 1.7109, 2.0639, 2.4922, 2.7969, 3.4668, 3.7454},
+            /* 25 */{25, 1.7081, 2.0595, 2.4851, 2.7874, 3.4502, 3.7251},
 
-          /* 26 */{26, 1.7056, 2.0555, 2.4786, 2.7787, 3.4350, 3.7066},
-          /* 27 */{27, 1.7033, 2.0518, 2.4727, 2.7707, 3.4210, 3.6896},
-          /* 28 */{28, 1.7011, 2.0484, 2.4671, 2.7633, 3.4082, 3.6739},
-          /* 29 */{29, 1.6991, 2.0452, 2.4620, 2.7564, 3.3962, 3.6594},
-          /* 30 */{30, 1.6973, 2.0423, 2.4573, 2.7500, 3.3852, 3.6460},
+            /* 26 */{26, 1.7056, 2.0555, 2.4786, 2.7787, 3.4350, 3.7066},
+            /* 27 */{27, 1.7033, 2.0518, 2.4727, 2.7707, 3.4210, 3.6896},
+            /* 28 */{28, 1.7011, 2.0484, 2.4671, 2.7633, 3.4082, 3.6739},
+            /* 29 */{29, 1.6991, 2.0452, 2.4620, 2.7564, 3.3962, 3.6594},
+            /* 30 */{30, 1.6973, 2.0423, 2.4573, 2.7500, 3.3852, 3.6460},
 
-          /* 40 */{40, 1.6839, 2.0211, 2.4233, 2.7045, 3.3069, 3.5510},
-          /* 50 */{50, 1.6759, 2.0086, 2.4033, 2.6778, 3.2614, 3.4960},
-          /* 100 */{100, 1.6602, 1.9840, 2.3642, 2.6259, 3.1737, 3.3905},
+            /* 40 */{40, 1.6839, 2.0211, 2.4233, 2.7045, 3.3069, 3.5510},
+            /* 50 */{50, 1.6759, 2.0086, 2.4033, 2.6778, 3.2614, 3.4960},
+            /* 100 */{100, 1.6602, 1.9840, 2.3642, 2.6259, 3.1737, 3.3905},
 
-          /* 00 */{101, 1.6479, 1.9647, 2.3338, 2.5857, 3.1066, 3.3101}};
+            /* 00 */{101, 1.6479, 1.9647, 2.3338, 2.5857, 3.1066, 3.3101}
+        };
 
-        static private double Inter(double f, int j) {
+        private static double Inter(double f, int j) {
             int k = 0;
-            for (int i = 1; i < St.length; i++)
+            for (int i = 1; i < St.length; i++) {
                 if (St[i][0] > f) {
                     k = i;
                     break;
                 }
+            }
             return St[k - 1][j] + (St[k][j] - St[k - 1][j]) * (f - St[k - 1][0])
                     / (St[k][0] - St[k - 1][0]);
         }
 
+        /**
+         * Calculates Student's t critical value.
+         * 
+         * @param side number of tails (sides)
+         * @param f degrees of freedom
+         * @param p probability
+         * @return critical value
+         */
         public static double calcStudent(int side, double f, double p) {
-
             int j;
             int p_100 = (int) (p * 100);
             if (side == 1) {
-                switch (p_100) {
-                    case 9500:
-                        j = 1;
-                        break;
-                    case 9750:
-                        j = 2;
-                        break;
-                    case 9900:
-                        j = 3;
-                        break;
-                    case 9950:
-                        j = 4;
-                        break;
-                    case 9990:
-                        j = 5;
-                        break;
-                    case 9995:
-                        j = 6;
-                        break;
-                    default:
-                        j = 1;
-                        break;
-                }
+                j = switch (p_100) {
+                    case 9500 -> 1;
+                    case 9750 -> 2;
+                    case 9900 -> 3;
+                    case 9950 -> 4;
+                    case 9990 -> 5;
+                    case 9995 -> 6;
+                    default -> 1;
+                };
             }
             else {
-                switch (p_100) {
-                    case 9000:
-                        j = 1;
-                        break;
-                    case 9500:
-                        j = 2;
-                        break;
-                    case 9800:
-                        j = 3;
-                        break;
-                    case 9900:
-                        j = 4;
-                        break;
-                    case 9980:
-                        j = 5;
-                        break;
-                    case 9990:
-                        j = 6;
-                        break;
-                    default:
-                        j = 1;
-                        break;
-                }
+                j = switch (p_100) {
+                    case 9000 -> 1;
+                    case 9500 -> 2;
+                    case 9800 -> 3;
+                    case 9900 -> 4;
+                    case 9980 -> 5;
+                    case 9990 -> 6;
+                    default -> 1;
+                };
             }
-            if (f == 0)
+            if (f == 0) {
                 return St[St.length - 1][j];
-            if (f > 100)
+            }
+            if (f > 100) {
                 return St[St.length - 1][j];
+            }
             return Inter(f, j);
-
         }
 
+        /**
+         * Calculates gamma function value.
+         * 
+         * @param x input value
+         * @return gamma value
+         */
         public static double gamma(double x) {
             double p = Math.exp(-0.57721566490153286060 * x) / x;
             for (int n = 1; n < 50000000; n++) {
@@ -510,25 +708,35 @@ public class MathUtils {
         private static double kn(int n) {
             double k1 = 1 / (Math.PI * Math.sqrt(n));
             double k2 = 0.5 / Math.sqrt(n);
-            if (n < 2)
+            if (n < 2) {
                 return k1;
+            }
             if (n % 2 == 1) {
-                for (double i = 2; i < n; i += 2)
+                for (double i = 2; i < n; i += 2) {
                     k1 *= i / (i - 1);
+                }
                 return k1;
             }
             else {
-                for (double i = 2; i < n; i += 2)
+                for (double i = 2; i < n; i += 2) {
                     k2 *= (i - 1) / i;
+                }
                 k2 *= n - 1;
                 return k2;
             }
         }
 
+        /**
+         * Calculates student distribution integral value.
+         * 
+         * @param n degrees of freedom
+         * @param t t-value
+         * @return integral result
+         */
         public static double s(int n, double t) {
-            if (n < 1)
-                //throw new RuntimeException();
+            if (n < 1) {
                 return -1;
+            }
             double sum = 0;
             final double du = 0.01;
             double u = t - 0.5 * du;
@@ -537,14 +745,15 @@ public class MathUtils {
             }
             return sum * kn(n);
         }
-
     }
 
+    /**
+     * Inner class for Bartlett's test calculations.
+     */
     public static class Bartlett {
-
         static final int n_elem = 18;
 
-        enum AB {a, b}
+        enum AB { a, b }
 
         static class AB_pair {
             public double a, b;
@@ -555,22 +764,23 @@ public class MathUtils {
             }
         }
 
-        static double[] dc = new double[]{0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5,
-                4, 4.5, 5, 6, 7, 8, 9, 10, 12, 14};
+        static double[] dc = new double[] { 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5,
+                4, 4.5, 5, 6, 7, 8, 9, 10, 12, 14 };
 
         static class C {
             public static int int_c(double d) {
-                for (int i = 0; i < n_elem; i++)
-                    if (d == dc[i])
+                for (int i = 0; i < n_elem; i++) {
+                    if (d == dc[i]) {
                         return i;
+                    }
+                }
                 return -1;
             }
         }
 
         double m(int k, AB ab, double c1) {
             AB_pair[][] m_arr = {
-                    new AB_pair[]{
-
+                    new AB_pair[] {
                             new AB_pair(5.99, 5.99),
                             new AB_pair(6.47, 6.22),
                             new AB_pair(6.89, 6.43),
@@ -579,7 +789,7 @@ public class MathUtils {
                             new AB_pair(7.39, 7.03),
                             new AB_pair(7.22, 7.22)
                     },
-                    new AB_pair[]{
+                    new AB_pair[] {
                             new AB_pair(7.81, 7.81),
                             new AB_pair(8.24, 8.00),
                             new AB_pair(8.63, 8.17),
@@ -590,7 +800,7 @@ public class MathUtils {
                             new AB_pair(9.37, 9.02),
                             new AB_pair(9.18, 9.18)
                     },
-                    new AB_pair[]{
+                    new AB_pair[] {
                             new AB_pair(9.49, 9.49),
                             new AB_pair(9.88, 9.65),
                             new AB_pair(10.24, 9.80),
@@ -603,7 +813,7 @@ public class MathUtils {
                             new AB_pair(11.21, 10.87),
                             new AB_pair(11.02, 11.02)
                     },
-                    new AB_pair[]{
+                    new AB_pair[] {
                             new AB_pair(11.07, 11.07),
                             new AB_pair(11.43, 11.22),
                             new AB_pair(11.78, 11.36),
@@ -617,7 +827,7 @@ public class MathUtils {
                             new AB_pair(13.10, 12.50),
                             new AB_pair(12.78, 12.78)
                     },
-                    new AB_pair[]{
+                    new AB_pair[] {
                             new AB_pair(12.59, 12.59),
                             new AB_pair(12.94, 12.73),
                             new AB_pair(13.27, 12.87),
@@ -632,7 +842,7 @@ public class MathUtils {
                             new AB_pair(14.81, 14.22),
                             new AB_pair(14.49, 14.49)
                     },
-                    new AB_pair[]{
+                    new AB_pair[] {
                             new AB_pair(14.07, 14.07),
                             new AB_pair(14.40, 14.20),
                             new AB_pair(14.72, 14.33),
@@ -648,7 +858,7 @@ public class MathUtils {
                             new AB_pair(16.49, 15.90),
                             new AB_pair(16.16, 16.16)
                     },
-                    new AB_pair[]{
+                    new AB_pair[] {
                             new AB_pair(15.51, 15.51),
                             new AB_pair(15.83, 15.63),
                             new AB_pair(16.14, 15.76),
@@ -665,7 +875,7 @@ public class MathUtils {
                             new AB_pair(18.12, 17.54),
                             new AB_pair(17.79, 17.79)
                     },
-                    new AB_pair[]{
+                    new AB_pair[] {
                             new AB_pair(16.92, 16.92),
                             new AB_pair(17.23, 17.04),
                             new AB_pair(17.54, 17.17),
@@ -683,7 +893,7 @@ public class MathUtils {
                             new AB_pair(19.73, 19.16),
                             new AB_pair(19.40, 19.40)
                     },
-                    new AB_pair[]{
+                    new AB_pair[] {
                             new AB_pair(18.31, 18.31),
                             new AB_pair(18.61, 18.43),
                             new AB_pair(18.91, 18.55),
@@ -701,7 +911,7 @@ public class MathUtils {
                             new AB_pair(21.49, 20.50),
                             new AB_pair(21.32, 20.75)
                     },
-                    new AB_pair[]{
+                    new AB_pair[] {
                             new AB_pair(19.68, 19.68),
                             new AB_pair(19.97, 19.79),
                             new AB_pair(20.26, 19.91),
@@ -720,7 +930,7 @@ public class MathUtils {
                             new AB_pair(23.07, 22.08),
                             new AB_pair(22.56, 22.56)
                     },
-                    new AB_pair[]{
+                    new AB_pair[] {
                             new AB_pair(21.03, 21.03),
                             new AB_pair(21.32, 21.14),
                             new AB_pair(21.60, 21.26),
@@ -739,7 +949,7 @@ public class MathUtils {
                             new AB_pair(24.70, 23.40),
                             new AB_pair(24.44, 23.88)
                     },
-                    new AB_pair[]{
+                    new AB_pair[] {
                             new AB_pair(22.36, 22.36),
                             new AB_pair(22.65, 22.48),
                             new AB_pair(22.93, 22.60),
@@ -759,7 +969,7 @@ public class MathUtils {
                             new AB_pair(26.17, 25.19),
                             new AB_pair(25.66, 25.66)
                     },
-                    new AB_pair[]{
+                    new AB_pair[] {
                             new AB_pair(23.68, 23.68),
                             new AB_pair(23.97, 23.80),
                             new AB_pair(24.24, 23.92),
@@ -782,20 +992,23 @@ public class MathUtils {
             };
 
             if (C.int_c(c1) != -1) {
-                if (ab == AB.a)
+                if (ab == AB.a) {
                     return m_arr[k - 3][C.int_c(c1)].a;
-                else
+                }
+                else {
                     return m_arr[k - 3][C.int_c(c1)].b;
+                }
             }
             else {
                 int n_b = 0;
                 int n_e = 0;
-                for (int i = 0; i < n_elem; i++)
+                for (int i = 0; i < n_elem; i++) {
                     if (c1 < dc[i]) {
                         n_b = i - 1;
                         n_e = i;
                         break;
                     }
+                }
                 double c_l_b = dc[n_b];
                 double c_l_e = dc[n_e];
                 if (ab == AB.a) {
@@ -815,57 +1028,71 @@ public class MathUtils {
             }
         }
 
+        /**
+         * Results container for Bartlett's test.
+         */
         public static class Mm {
             double m_;
             double M;
             boolean uniformity;
+
+            /**
+             * Gets the calculated value.
+             * 
+             * @return calculated value
+             */
             public double getCalculated() {
                 return M;
             }
+
+            /**
+             * Gets the tabular value.
+             * 
+             * @return tabular value
+             */
             public double getTabular() {
                 return m_;
             }
+
+            /**
+             * Gets uniformity status.
+             * 
+             * @return true if uniform, false otherwise
+             */
             public boolean getUniformity() {
                 return uniformity;
             }
         }
 
+        /**
+         * Performs Bartlett's test for homogeneity of variances.
+         * 
+         * @param nu array of degrees of freedom
+         * @param s2 array of variances
+         * @param k number of groups
+         * @return test result container
+         * @throws BadData if data values are invalid
+         */
         public Mm Bartlett_(int[] nu, double[] s2, int k) throws BadData {
             Mm mm = new Mm();
-            int n_el = 0;
-            switch (k) {
-                case 3: n_el = 7;
-                    break;
-                case 4: n_el = 9;
-                    break;
-                case 5: n_el = 11;
-                    break;
-                case 6: n_el = 12;
-                    break;
-                case 7: n_el = 13;
-                    break;
-                case 8: n_el = 14;
-                    break;
-                case 9: n_el = 15;
-                    break;
-                case 10: n_el = 16;
-                    break;
-                case 11: n_el = 16;
-                    break;
-                case 12: n_el = 17;
-                    break;
-                case 13: n_el = 17;
-                    break;
-                case 14: n_el = 18;
-                    break;
-                case 15: n_el = 18;
-                    break;
-                default: {
-                    n_el = 0;
-                    mm.M = 0;
-                    mm.m_ = 0;
-                    return null;
-                }
+            int n_el = switch (k) {
+                case 3 -> 7;
+                case 4 -> 9;
+                case 5 -> 11;
+                case 6 -> 12;
+                case 7 -> 13;
+                case 8 -> 14;
+                case 9 -> 15;
+                case 10, 11 -> 16;
+                case 12, 13 -> 17;
+                case 14 -> 18;
+                case 15 -> 18;
+                default -> 0;
+            };
+            if (n_el == 0) {
+                mm.M = 0;
+                mm.m_ = 0;
+                return null;
             }
             mm.uniformity = true;
             int sum_nu = 0;
@@ -877,27 +1104,31 @@ public class MathUtils {
                 ll = s2[i];
                 ll = nu[i] * s2[i];
                 sum_nu_s2 += nu[i] * s2[i];
-                if (s2[i] <= 0)
+                if (s2[i] <= 0) {
                     throw new BadData();
+                }
                 ll = Math.log(s2[i]);
                 ll = nu[i] * Math.log(s2[i]);
                 sum_nu_logs2 += nu[i] * Math.log(s2[i]);
             }
             //1:
             ll = (1.0 / sum_nu) * sum_nu_s2;
-            if (ll <= 0)
+            if (ll <= 0) {
                 throw new BadData();
+            }
             ll = Math.log(ll);
             ll = sum_nu * ll;
-            if (((1.0 / sum_nu) * sum_nu_s2) <= 0)
+            if (((1.0 / sum_nu) * sum_nu_s2) <= 0) {
                 throw new BadData();
+            }
             mm.M = sum_nu * Math.log((1.0 / sum_nu) * sum_nu_s2) - sum_nu_logs2;
             // double M = 8.60;
             //M = 8.30;
             double max_ma = 0;
             for (int i = 0; i < n_el; i++) {
-                if (m(k, AB.a, dc[i]) > max_ma)
+                if (m(k, AB.a, dc[i]) > max_ma) {
                     max_ma = m(k, AB.a, dc[i]);
+                }
             }
             double min_mb = max_ma;
             for (int i = 0; i < n_el; i++) {
@@ -917,8 +1148,9 @@ public class MathUtils {
             mm.m_ = min_mb;
             if ((max_ma > mm.M) && (mm.M >= min_mb)) {
                 double c1 = 0;
-                for (int i = 0; i < k; i++)
+                for (int i = 0; i < k; i++) {
                     c1 += 1.0 / nu[i];
+                }
                 c1 = c1 - 1.0 / sum_nu;
 
                 if (c1 > dc[n_el - 1]) {
@@ -940,8 +1172,9 @@ public class MathUtils {
                 //3:
                 if ((m(k, AB.a, c1) > mm.M) && (mm.M >= m(k, AB.b, c1))) {
                     double c3 = 0;
-                    for (int i = 0; i < k; i++)
+                    for (int i = 0; i < k; i++) {
                         c3 += 1.0 / (nu[i] * nu[i] * nu[i]);
+                    }
                     c3 = c3 - 1.0 / (sum_nu * sum_nu * sum_nu);
                     double C = (c1 * c1 * c1) / (k * k);
                     double dC = c1 - C;
@@ -957,10 +1190,21 @@ public class MathUtils {
         }
     }
 
+    /**
+     * Calculates the square of a number.
+     * 
+     * @param x the input value
+     * @return the squared value
+     */
     public static double sqr(double x) {
         return x * x;
     }
 
+    /**
+     * Main execution method for testing math utilities.
+     * 
+     * @param args command-line arguments
+     */
     static void main(String[] args) {
         for (int i = 0; i < 20; i++) {
             double d = (new Random().nextDouble() - 0.5) * 4000;
@@ -970,4 +1214,3 @@ public class MathUtils {
         }
     }
 }
-
