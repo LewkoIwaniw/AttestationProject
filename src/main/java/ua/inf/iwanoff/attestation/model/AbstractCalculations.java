@@ -12,6 +12,9 @@ import static ua.inf.iwanoff.utils.StringUtils.*;
 
 /**
  * Created by Leo on 18.11.18.
+ * 
+ * Abstract base class providing core calculation and statistical analysis routines 
+ * for material attestation procedures[cite: 11].
  */
 public abstract class AbstractCalculations {
     protected int flag;
@@ -25,6 +28,9 @@ public abstract class AbstractCalculations {
     protected Result practDiffPSS;
     protected Result practDiffWRS;
 
+    /**
+     * Enumeration representing data validation status codes[cite: 11].
+     */
     public enum DataCheck {
         OK,
         NO_XPSS,
@@ -37,6 +43,9 @@ public abstract class AbstractCalculations {
         WRONG_X_COUNT
     }
 
+    /**
+     * Enumeration representing times analysis statuses for drift evaluations[cite: 11].
+     */
     public enum Times { OK, MISSED, WRONG, INSUFFICIENT }
 
     public static final boolean SIGNIFICANT = false;
@@ -122,15 +131,21 @@ public abstract class AbstractCalculations {
     protected boolean[] hQ;
     protected Result certifiedValue;
 
+    /**
+     * Constructs an instance of AbstractCalculations with the provided sample data[cite: 11].
+     * 
+     * @param data the certification data containing sample measurements[cite: 11]
+     */
     public AbstractCalculations(WrsData data) {
         this.data = data;
     }
 
     /**
-     * Main calculation method used in all three schemata of attestation
+     * Main calculation method used in all three schemata of attestation[cite: 11].
      *
-     * @param flag
-     * @return array of bytes that represents final report
+     * @param flag calculation execution flags[cite: 11]
+     * @param optionsData user-defined calculation options and configuration[cite: 11]
+     * @return array of bytes that represents final report[cite: 11]
      */
     protected byte[] calc(int flag, OptionsData optionsData) {
         this.flag = flag;
@@ -209,7 +224,7 @@ public abstract class AbstractCalculations {
 
     private void calcWSSSamplesHomogeneity() {
         double[] dWRS = new double[wrsCount];
-        //Нормализованное среднее значение РСО
+        // Normalized average value of WRS
         aWRS = new double[wrsCount];
         int k = 0;
         for (int i = 0; i < data.size(); i++)
@@ -245,13 +260,13 @@ public abstract class AbstractCalculations {
         studentPCO = Result.create(7, 4).setValue(Student.calcStudent(
                 optionsData.getSides() == OptionsData.OneTwo.ONE ? 1 : 2, wrsCount - 1, 95.0));
         delta_unit = Result.create(2).setValue(rsdp_unit.getValue() * studentPCO.getValue());
-        // Требования к неопределенности аттестованного значения РСО -
+        // Requirements for the uncertainty of the certified value of WRS -
         reqDeltaWRS = Result.create(2).setValue(valueOrDefault(data.getDeltaWRS(), -1));
-        // фактически всегда критерий 0,5%.
-        // Требования к относительному доверительному интервалу
+        // practically always a 0.5% criterion.
+        // Requirements for the relative confidence interval
         reqDeltaUnit = Result.create(2).setValue(valueOrDefault(data.getDeltaWRS(), -1)); // getDeltaUnit ?
-        // для единичного содержания упаковки (data.DeltaUnit=data.DeltaWRS)
-        //Аттестованное значение ФСО
+        // for a single package content (data.DeltaUnit=data.DeltaWRS)
+        // Certified value of PSS
         xpss = valueOrDefault(data.getXPSS(), -1);
         if (reqDeltaUnit.getRounded() <= 0) {
             reqDeltaUnit.setValue(reqDeltaWRS.getValue());
@@ -373,7 +388,7 @@ public abstract class AbstractCalculations {
                 for (int j = 0; j < data.sizeSorted(i); j++) {
                     a[i][j] = data.xSorted(i, j);
                 }
-                //стр. 2 ячейки 1...sampleCount  Среднее значение аналитического сигнала для j-того р-ра
+                // p. 2 cells 1...sampleCount Average value of analytical signal for the j-th solution
             }
             double[][] d = new double[data.size()][data.getMaxSampleXCount()];
             for (int i = 0; i < data.size(); i++) {
@@ -433,6 +448,12 @@ public abstract class AbstractCalculations {
         homogeneous = allTrue(hQ);
     }
 
+    /**
+     * Checks whether all boolean values in the given array are true[cite: 11].
+     * 
+     * @param arr the boolean array to check[cite: 11]
+     * @return true if all elements are true, false otherwise[cite: 11]
+     */
     public static boolean allTrue(boolean... arr) {
         for (boolean b : arr) {
             if (!b) {
@@ -514,16 +535,16 @@ public abstract class AbstractCalculations {
     private void statisticalQualityTest() {
         double urs = MathUtils.UnitedRelativeStandardDeviation(rsd);
         int[] countWRS2 = new int[wrsCount];
-        double[] aWRS2 = new double[wrsCount];  //Нормализованное среднее значение РСО
+        double[] aWRS2 = new double[wrsCount];  // Normalized average value of WRS
         double[] dWRS = new double[wrsCount];
 
-        //Нормализованное среднее значение СО
+        // Normalized average value of CS
         aPSS = new double[pssCount];
-        aWRS = new double[wrsCount];  //Нормализованное среднее значение РСО
+        aWRS = new double[wrsCount];  // Normalized average value of WRS
 
         if (pssCount == 2 || wrsCount == 2) {
             int[] countPSS2 = new int[pssCount];
-            // Нормализованное среднее значение СО
+            // Normalized average value of CS
             double[] aPSS2 = new double[pssCount];
             int k = 0;
             for (int i = 0; i < data.size(); i++) {
@@ -636,16 +657,16 @@ public abstract class AbstractCalculations {
                 delta_pPSS = Math.sqrt(MathUtils.sqr(united * student95) / countPSS2[0]
                         + MathUtils.sqr(united * student95) / countPSS2[1] + delta_dop_pPSS1 + delta_dop_pPSS2);
                 deltaPPSS = Result.create(2).setValue(delta_pPSS);
-                // ФСО Максимально допустимое различие приведенных средних значений
-                //(относительный односторонний доверительный интервал для вероятности 95%)
+                // PSS Maximum permissible difference of reduced average values
+                // (relative one-sided confidence interval for 95% probability)
             }
             delta_pWRS = 0;
             if (countWRS2.length > 1) {
                 delta_pWRS = Math.sqrt(MathUtils.sqr(united * student95) / countPSS2[0]
                         + MathUtils.sqr(united * student95) / countPSS2[1] + delta_dop_pWRS1 + delta_dop_pWRS2);
                 deltaPWRS = Result.create(2).setValue(delta_pWRS);
-                // РСО Максимально допустимое различие приведенных средних значений
-                // (относительный односторонний доверительный интервал для вероятности 95%)
+                // WRS Maximum permissible difference of reduced average values
+                // (relative one-sided confidence interval for 95% probability)
             }
 
             if (countPSS2.length > 1) {
@@ -677,7 +698,7 @@ public abstract class AbstractCalculations {
             }
             if (reqDeltaWRS.getRounded() > 0)
             {
-                if (pssCount == 2 && wrsCount == 2)//если кол-во выборок = 2
+                if (pssCount == 2 && wrsCount == 2) // if number of samples = 2
                 {
 
                     double stud = Student.calcStudent(1, MathUtils.fp(f), 95);
@@ -805,4 +826,3 @@ public abstract class AbstractCalculations {
         return 0;
     }
 }
-
